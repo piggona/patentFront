@@ -1,0 +1,27 @@
+{
+  "name": "patentfront",
+  "version": "1.0.0",
+  "description": "\"vanlink patent sys\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piggona/patentFront.git"
+  },
+  "keywords": [
+    "patent",
+    "front"
+  ],
+  "author": "haohao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/piggona/patentFront/issues"
+  },
+  "homepage": "https://github.com/piggona/patentFront#readme",
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
