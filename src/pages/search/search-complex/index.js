@@ -4,8 +4,7 @@
 */
 'use strict';
 
-require('./index.css');
-'use strict';
+
 require('./index.css');
 
 var _patent = require('utils/patent.js');
@@ -22,6 +21,7 @@ var header = {
         }
     },
     bindEvent : function(){
+        // 两个回调函数
         var _this = this;
         $('#search-btn').click(function(){
             _this.searchSubmit();
@@ -49,7 +49,7 @@ var header = {
         else{
             _patent.request({
                 //发data到服务器地址
-                url : 'http://wanlinke.com',
+                url : 'http://wanlinke.com/9200',
                 data : submit_data,
                 success: function(res){
                     if(res.keyword){
