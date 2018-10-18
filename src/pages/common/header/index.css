@@ -1,0 +1,39 @@
+/*搜索框*/
+select {
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 2px #616161;
+    height: 40px;
+    width: 100px;
+  
+    /*很关键：将默认的select选择框样式清除*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+  
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("https://raw.githubusercontent.com/ourjs/static/gh-pages/2015/arrow.png") no-repeat scroll right center transparent;
+  
+  
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+  }
+.search-con{
+    padding: 30px 0 30px 0px;
+}
+.search-con .search-input{
+    width: 650px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    font-size: 15px;
+    border: 2px solid #616161;
+}
+.search-con .search-btn{
+    position: absolute;
+    height: 40px;
+}
+
+.search-con .search-btn:hover{
+    color: #fff;
+    background: #1565C0;
+}

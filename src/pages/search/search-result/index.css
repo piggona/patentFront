@@ -1,0 +1,61 @@
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+.m-0 {
+    margin: 0!important;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    background-color: transparent;
+}
+.table td, .table th{
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+td, th {
+    display: table-cell;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit
+}
+th {
+    font-weight: bold;
+    vertical-align: middle;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    
+}
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    color: #fff;
+    background-color: #17a2b8;
+}

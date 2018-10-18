@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>search</title>
+    <%= require('html-loader!./layout/head-common.html') %>
+    <%= require('html-loader!./layout/head-search.html') %>
+    <title>专利系统index页面</title>
 </head>
-<body>
 
+<body>
+<%= require('html-loader!./layout/nav.html') %>
+<%= require('html-loader!./layout/nav-simple.html') %>
+<div class="page-wrap w">
+    <%= require('html-loader!./layout/nav-side.html') %>
+    <div class="content with-nav">
+        <%= require('html-loader!./layout/select-search-point.html') %>
+        <%= require('html-loader!./layout/search-result.html') %>
+    </div>
+</div>
+<%= require('html-loader!./layout/footer.html') %>
 </body>
+<script>
+    (function(){
+        this.click=function(data){
+            var selected = $(data);
+            var former = $('#side_chosen');
+            var standard_search = $('#standard_search');
+            var second_search = $('#second_search');
+            console.log(selected);
+            former.attr("id","not_chosen")
+            selected.attr("id","side_chosen");
+            if (data === '.button1')
+            {
+                standard_search.attr("class","col-md-12");
+                second_search.attr("class","col-md-12 hide");
+
+            }else{
+                standard_search.attr("class","col-md-12 hide");
+                second_search.attr("class","col-md-12");
+            }
+        }
+        window.SlideClick=this;
+    })();
+</script>
 </html>

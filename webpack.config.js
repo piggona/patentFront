@@ -30,8 +30,40 @@ var config = {
     },
     module: {
         rules: [
-            { test: /\.css$/, use: ExtractTextPlugin.extract("style-loader","css-loader") },
-            { test: /\.(png|jpg|woff|svg|eot|ttf|gif|jpeg)\??.*$/, use: "url-loader?limit=100000&name=resource/[name].[ext]" },
+            { test: /\.css$/, use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"
+            })},
+            { test: /\.(png|jpg|woff|svg|eot|ttf|gif|jpeg)$/, use:[
+                {
+                    loader: 'url-loader',
+                    options: {
+                        outputPath: 'assets/images',
+                        limit: 10000}
+                },
+                {
+                    loader: 'img-loader',
+                    options: {
+                        mozjepg: {
+                            progressive: true,
+                            quality: 65
+                        },
+                        optipng: {
+                            enabled: false,
+                        },
+                        pngquant: {
+                            quality: '65-90',
+                            speed: 4
+                        },
+                        gifsicle: {
+                            interlaced: false,
+                        },
+                        webp: {
+                            quality: 75
+                        }
+                    }
+                }
+            ]},
             { test: /\.(woff|svg|eot|ttf)\??.*$/, use: 'style-loader!css-loader'},
         ]
     },

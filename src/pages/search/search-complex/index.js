@@ -6,7 +6,6 @@
 
 
 require('./index.css');
-
 var _patent = require('utils/patent.js');
 
 var header = {

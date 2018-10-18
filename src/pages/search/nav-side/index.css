@@ -1,0 +1,29 @@
+/*专利国家范围*/
+.nav-side{
+    float: left;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 40px;
+}
+.nav-side .nav-item{
+    line-height: 40px;
+    font-size: 15px;
+}
+.nav-side .nav-item .side_link{
+    text-align: center;
+    font-weight: bold;
+    color      : #666;
+}
+
+.nav-side .nav-item .side_link:hover{
+    color: rgb(0, 0, 0);
+}
+/*专利搜索主页面*/
+.content.with-nav{
+    float: left;
+    width: 950px;
+}
+.nav-side .side_link#side_chosen{
+    background-color : #424242;
+    color: #EEEEEE
+}

@@ -3,31 +3,32 @@
 *持久化数据记录(search),展示持久化数据记录
 */
 'use strict';
+require('./index.css');
+var _patent = require('utils/patent.js');
+var _result = require('html-loader!./result.html');
 
 var _searchResult = {
-    publicId   : '',
-    title      : '',
-    patentee   : '',
-    publicDate : '',
-    IPC        : '',
+    displayPack : [{publicId:'publicId',title:'title',patentee:'patentee',publicDate:'publicDate',IPC:'IPC'}],
+    resultTemplate : _result,
+    // publicId   : '',
+    // title      : '',
+    // patentee   : '',
+    // publicDate : '',
+    // IPC        : '',
 
-    result     : function(params){
-        // 存储搜索结果
-        this.publicId   = params.publicId || '';
-        this.title      = params.title || '';
-        this.patentee   = params.patentee || '';
-        this.publicDate = params.publicDate || '';
-        this.IPC        = params.IPC || '';
+    result     : function(result){
+        // 存储搜索结果,结果格式为json数组
+        this.displayPack = JSON.parse(result);
     },
 
     display    : function(){
         // 在DOM中插入需要展示的查询结果
-        
+        var _displayPack = this.displayPack;
+        console.log(_displayPack);
+        for(let i=0,l=_displayPack.length;i<l;i++){
+            $('#search-result').append(_patent.renderHtml(_result,_displayPack[i]));
+        }
     }
-
-    
-
-
 }
 
-module.exports = _searchResult
+module.exports = _searchResult;
