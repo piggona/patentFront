@@ -22,7 +22,7 @@ var header = {
     bindEvent : function(){
         // 两个回调函数
         var _this = this;
-        $('#search-btn').click(function(){
+        $('#multi-search-button').click(function(){
             _this.searchSubmit();
         });
         //输入提交后，做搜索提交

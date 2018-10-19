@@ -40,5 +40,25 @@
         }
         window.SlideClick=this;
     })();
+    (function(){
+        this.resultclick=function(data){
+            var selected = $(data);
+            var former = $('.nav-link-result.active');
+            selected.attr("class","nav-link-result active");
+            former.attr("class","nav-link-result");
+            console.log(selected);
+            console.log(former);
+        }
+        this.searchclick=function(data){
+            var selected = $(data);
+            var former = $('.nav-link-search.active');
+            selected.attr("class","nav-link-search active");
+            former.attr("class","nav-link-search");
+        }
+        this.showResult=function(){
+            console.log($('#select2-item-person').val());
+        }
+        window.Click=this;
+    })();
 </script>
 </html>

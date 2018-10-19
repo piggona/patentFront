@@ -16,6 +16,8 @@ select {
   
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
     padding-right: 14px;
+    vertical-align: -webkit-baseline-middle;
+    margin-bottom: 10px;
   }
 .search-con{
     padding: 30px 0 30px 0px;

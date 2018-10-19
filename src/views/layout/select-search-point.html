@@ -2,9 +2,15 @@
 <div class="card card-default">
     <!--头信息：改为选择块-->
     <div class="card-header">
-        <h3 class="card-title">专利搜索项目选择</h3>
+            <ul class="nav nav-pills col-md-9">
+                <li class="nav-item"><button class="nav-link-search" id="searchpatent" data-toggle="tab" onclick="Click.searchclick('#searchpatent')">专利查询</button></li>
+                <li class="nav-item"><button class="nav-link-search active" id="searchpaper" data-toggle="tab" onclick="Click.searchclick('#searchpaper')">论文查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchfound" data-toggle="tab" onclick="Click.searchclick('#searchfound')">基金查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchcorp" data-toggle="tab" onclick="Click.searchclick('#searchcorp')">机构查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchperson" data-toggle="tab" onclick="Click.searchclick('#searchperson')">人员查询</button></li>
+            </ul>
         <!--/*框选项*/-->
-        <div class="card-tools">
+        <div class="card-tools col-md-3">
             <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
             <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
@@ -40,23 +46,25 @@
 
                         <!-- 多项搜索 -->
                         <div class="col-md-12 hide" id="second_search">
-                            <div class="form-group">
-                                <label>专利所有人搜索</label>
-                                <select id="select2-item-person" class="form-control select2" multiple="multiple" data-placeholder="专利所有人"
-                                        style="width: 100%;">
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">文件输入</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">选择上传的文件</label>
-                                    </div>
+                            <div id="search-block">
+                                <div class="form-group">
+                                    <label>专利所有人搜索</label><br>
+                                    <select class="multi-search">
+                                        <option value="and">and</option>
+                                        <option value="or">or</option>
+                                    </select>
+                                    <select class="multi-search" id="search-option">
+                                        <option value="patent-id">专利号搜索</option>
+                                        <option value="patent-person">名称搜索</option>
+                                    </select>
+                                    <select id="select2-item-person" class="form-control select2" multiple="multiple" data-placeholder="专利所有人"
+                                    style="width: 70%;"></select>
+                                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">搜索</button>
+                                <button id="multi-search-button" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索</button>
                             </div>
                         </div>
                         <!-- 多项选择结束-->

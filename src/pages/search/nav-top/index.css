@@ -1,2 +1,45 @@
+.nav-link-search {
+    display: block;
+    padding: 0.5rem 1rem;
+}
 
+.nav-link-search:hover, .nav-link-search:focus {
+    text-decoration: none;
+}
+
+.nav-link-search.disabled {
+    color: #6c757d;
+}
+.nav-tabs .nav-link-search {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs .nav-link-search:hover, .nav-tabs .nav-link-search:focus {
+    border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link-search.disabled {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.nav-tabs .nav-link-search.active,
+.nav-tabs .nav-item.show .nav-link-search {
+    color: #495057;
+    background-color: #ffffff;
+    border-color: #dee2e6 #dee2e6 #ffffff;
+}
+
+.nav-pills .nav-link-search {
+    border-radius: 0.25rem;
+}
+
+.nav-pills .nav-link-search.active,
+.nav-pills .show > .nav-link-search {
+    color: #ffffff;
+    background-color: #007bff;
+}
 

@@ -16,25 +16,29 @@ var _searchResult = require('./search-result/index.js');
 _searchResult.display();
 
 $(document).ready(function(){
-    _patent.request({
-        //发data到服务器地址
-        url : 'http://wanlinke.com',
-        data : submit_data,// 向后端发送请求选择项
-        success: function(res){
-            $("#select2-choose").select2({
+    $("#search-option").change(function(){
+        var selected=$(this).children('option:selected').val();
+        var content_id= require('html-loader!pages/search/search-complex/content-id.html');
+        var content_person= require('html-loader!pages/search/search-complex/content-person.html');
+       // alert(selected);
+       console.log('测试选项'+selected);
+        if(selected=="patent-id"){
+            //document.getElementById("search_content_id").
+            $(this).next().remove();
+            $(this).next().remove();
+            $(this).after(content_id);
+            $("#select2-item-id").select2({
                 tags: true,
                 multiple: true,
-                data: res.choose
+                data: [{id: 0, text: 'IPC专利号'}, {id: 1, text: '专利所有人'}, {id: 2, text: '专利所在公司'}]
             });//启动select2
-        
+        }else if(selected=="patent-person"){
+            $(this).next().remove();
+            $(this).next().remove();
+            $(this).after(content_person);
             $("#select2-item-person").select2({
-                data: res.itemPerson
+                data: [{id: 0, text: '新泽西'}, {id: 1, text: '何旭东'}]
             });
-        },
-        error: function(err){
-            console.log(err);
         }
     });
-    _searchResult.display();
-    
 });
