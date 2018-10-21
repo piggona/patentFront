@@ -39,3 +39,7 @@ select {
     color: #fff;
     background: #1565C0;
 }
+
+.search-con select {
+    margin-bottom: 1rem;
+}

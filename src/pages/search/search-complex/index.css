@@ -18,3 +18,10 @@ select.multi-search {
     vertical-align: -webkit-baseline-middle;
     margin-bottom: 10px;
   }
+  .select-search-group {
+      padding-bottom: 3rem;
+  }
+
+  #search-block {
+      padding-bottom: 3rem;
+  }

@@ -8,7 +8,8 @@
 require('./index.css');
 var _patent = require('utils/patent.js');
 
-var header = {
+var header_multi = {
+    search_phrase : null,
     init : function(){
         this.bindEvent();
     },
@@ -25,20 +26,46 @@ var header = {
         $('#multi-search-button').click(function(){
             _this.searchSubmit();
         });
-        //输入提交后，做搜索提交
-        $('#search-input').keyup(function(e){
-            if(e.keycode === 13){
-                _this.searchSubmit();
-            }
+        $('#multi-search-button-second').click(function(){
+            _this.secondSearchSubmit();
         });
     },
     //搜索所有的输入,使用id查找，并提交。
     searchSubmit : function(){
         var submit_data = {};
         var keyword = $.trim($('#search-input').val());
-        if(keyword){
+        var search_mode = $('.nav-side').attr("id");
+        var search_index = $('.nav-link-search.active').attr("id");
+        var search_body = {};
+        if(!(selected_item === null)){
             // 向data加入keyword
-            submit_data['keyword'] = keyword;
+            submit_data['search_mode'] = search_mode;
+            submit_data['search_index'] = search_index;
+
+            // id搜索结果
+            search_body['method'] = $('.form-group-id .multi-search').val();
+            search_body['value'] = $('#select2-item-id').val();
+            submit_data['search_id'] = search_body;
+
+            // 名称搜索结果
+            search_body['method'] = $('.form-group-name .multi-search').val();
+            search_body['value'] = $('#select2-item-name').val();
+            submit_data['search_name'] = search_body;
+
+            // 专利所有人搜索
+            search_body['method'] = $('.form-group-patentee .multi-search').val();
+            search_body['value'] = $('#select2-item-patentee').val();
+            submit_data['search_patentee'] = search_body;
+
+            // 专利国家搜索
+            search_body['method'] = $('.form-group-nation .multi-search').val();
+            search_body['value'] = $('#select2-item-nation').val();
+            submit_data['search_nation'] = search_body;
+
+            // 专利类型搜索
+            search_body['method'] = $('.form-group-type .multi-search').val();
+            search_body['value'] = $('#select2-item-type').val();
+            submit_data['search_type'] = search_body;
         }
         if ($.isEmptyObject(submit_data))
         {
@@ -51,8 +78,9 @@ var header = {
                 url : 'http://wanlinke.com/9200',
                 data : submit_data,
                 success: function(res){
-                    if(res.keyword){
-                        $('#search-input').val(keyword);
+                    if(res){
+                        _searchResult.result(res.data);
+                        _searchResult.display();
                     }
                     console.log(res);
                 },
@@ -61,7 +89,34 @@ var header = {
                 }
             });
         }
+    },
+    secondSearchSubmit : function(){
+
     }
 };
-
-header.init();
+$('#select2-item').change(function(){
+    var selected_item = $('#select2-item').val();
+    console.log(selected_item);
+    $('.form-group-id').attr('class','form-group-id hide');
+    $('.form-group-name').attr('class','form-group-name hide');
+    $('.form-group-patentee').attr('class','form-group-patentee hide');
+    $('.form-group-nation').attr('class','form-group-nation hide');
+    $('.form-group-type').attr('class','form-group-type hide');
+    if(!(selected_item === null)){
+        for(let i=0,len=selected_item.length; i<len; i++) {
+            let element = selected_item[i];
+            if(element === '0'){
+                $('.form-group-id').attr('class','form-group-id');
+            }else if(element === '1'){
+                $('.form-group-name').attr('class','form-group-name');
+            }else if(element === "2"){
+                $('.form-group-nation').attr('class','form-group-nation');
+            }else if(element === "3"){
+                $('.form-group-type').attr('class','form-group-type');
+            }else if(element === "4"){
+                $('.form-group-patentee').attr('class','form-group-patentee');
+            }
+        };
+    }   
+});
+header_multi.init();

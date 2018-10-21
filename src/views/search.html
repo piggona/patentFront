@@ -32,10 +32,12 @@
             {
                 standard_search.attr("class","col-md-12");
                 second_search.attr("class","col-md-12 hide");
+                $('.nav-side').attr("id","basic");
 
             }else{
                 standard_search.attr("class","col-md-12 hide");
                 second_search.attr("class","col-md-12");
+                $('.nav-side').attr("id","prime");
             }
         }
         window.SlideClick=this;
@@ -56,7 +58,7 @@
             former.attr("class","nav-link-search");
         }
         this.showResult=function(){
-            console.log($('#select2-item-person').val());
+            console.log($('#select2-item').val());
         }
         window.Click=this;
     })();

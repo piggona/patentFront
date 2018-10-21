@@ -1,0 +1,14 @@
+.display-bottom {
+    margin-right: 3rem;
+}
+.detail-text {
+    float: left;
+    width: 600px;
+}
+.detail-title {
+    margin-bottom: 3rem;
+}
+.btn-info {
+    width: 120px;
+    float: right;
+}

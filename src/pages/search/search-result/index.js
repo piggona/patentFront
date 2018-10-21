@@ -25,6 +25,7 @@ var _searchResult = {
         // 在DOM中插入需要展示的查询结果
         var _displayPack = this.displayPack;
         console.log(_displayPack);
+        $('#search-result').html("");
         for(let i=0,l=_displayPack.length;i<l;i++){
             $('#search-result').append(_patent.renderHtml(_result,_displayPack[i]));
         }

@@ -3,6 +3,7 @@
 
 require('./index.css');
 var _patent = require('utils/patent.js');
+var _searchResult = require('pages/search/search-result/index.js');
 
 var header = {
     init : function(){
@@ -32,9 +33,15 @@ var header = {
     searchSubmit : function(){
         var submit_data = {};
         var keyword = $.trim($('#search-input').val());
+        var search_type = $('#simple-search-type').val();
+        var search_mode = $('.nav-side').attr("id");
+        var search_index = $('.nav-link-search.active').attr("id");
         if(keyword){
             // 向data加入keyword
             submit_data['keyword'] = keyword;
+            submit_data['simple_search_type'] = search_type;
+            submit_data['search_mode'] = search_mode;
+            submit_data['search_index'] = search_index;
         }
         if ($.isEmptyObject(submit_data))
         {
@@ -45,10 +52,12 @@ var header = {
             _patent.request({
                 //发data到服务器地址
                 url : 'http://wanlinke.com/9200',
-                data : submit_data,
+                data : JSON.stringify(submit_data),
                 success: function(res){
                     if(res.keyword){
                         $('#search-input').val(keyword);
+                        _searchResult.result(res.data);
+                        _searchResult.display();
                     }
                     console.log(res);
                 },
