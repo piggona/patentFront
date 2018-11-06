@@ -10,11 +10,18 @@ require('./nav/index.js')
 require('./nav-side/index.js');
 require('./search-result/index.js');
 require('./search-complex/index.js');
+require('./search-simple/index.js');
 
 var _patent = require('utils/patent.js');
 var _searchResult = require('./search-result/index.js');
 _searchResult.display();
-
+$(document).ready(function(){
+    $("#select2-item-nation").select2({
+        tags: true,
+        multiple: true,
+        data: [{id: 0, text: '中国'}, {id: 1, text: '日本'}, {id: 2, text: '美国'}]
+    });//启动select2
+});
 // $(document).ready(function(){
 //     $("#search-option").change(function(){
 //         var selected=$(this).children('option:selected').val();

@@ -1,0 +1,91 @@
+<div class="post">
+        <div class="user-block">
+            <div class="detail-title">
+                <span class="username">
+                    <a class="patent-name" href="#">{{ title }}</a>
+                     
+                </span>
+                <span class="description">Shared publicly - {{ documentDate.raw }}</span>
+            </div>
+            
+
+            <div class="card-body">
+                <div class="detail-text">
+                    <p>
+                        {{ description.DRAWING_DESC.plain }}
+                    </p>
+                </div>
+                <div class="apply display-bottom" style="float :right">
+                        <strong><i class="fa fa-anchor mr-1"></i> 申请号码</strong>
+                        <br><br>
+
+                        <p class="text-muted">
+                            {{applicationId}}
+                        </p>
+                        <strong><i class="fa fa-calendar mr-1"></i> 申请日期</strong>
+                        <br><br>
+
+                        <p class="text-muted">
+                            {{applicationDate.raw}}
+                        </p>
+
+                        <hr>
+                </div>
+
+                <div class="public display-bottom" style="float: right">
+                        <strong><i class="fa fa-map-marker mr-1"></i> 公开号</strong>
+                        <br><br>
+
+                        <p class="text-muted">{{documentId}}</p>
+
+                        <strong><i class="fa fa-calendar mr-1"></i> 公开（公告）日期</strong>
+                        <br><br>
+
+                        <p class="text-muted">{{publishedDate.raw}}</p>
+
+                        <hr>
+
+                </div>
+                <div style="clear: both"></div>
+                <br><br><br><br>
+                
+
+                <div class="bottom">
+                    <div class="display-bottom" style="float: left; width: 300px">
+                        <strong><i class="fa fa-file-text-o mr-1"></i> CLASS TYPE</strong>
+                        <br><br>
+                        <p class="text-muted">ipc：</p>
+                        <p class="text-muted">{{ classification_name.ipc }}</p>
+                        <p class="text-muted">uspc：</p>
+                        <p class="text-muted">{{ classification_name.uspc }}</p>
+                        <p class="text-muted">cpc：</p>
+                        <p class="text-muted">{{ classification_name.cpc }}</p>
+                    </div>
+                    <div class="display-bottom"  style="float: left;">
+                            <strong><i class="fa fa-user mr-1"></i> 申请（专利权）人</strong>
+                            <br><br>
+                            <p class="text-muted">
+                                <span class="tag tag-success">{{ assignees_name }}</span>
+                            </p>
+                        
+                        
+                    </div>
+                    <div class="display-bottom" style="float: left; width: 300px" >
+                            <strong><i class="fa fa-file-text-o mr-1"></i> 发明（设计）人</strong>
+                            <br><br>
+
+                            <p class="text-muted">{{ inventor_name }}</p>
+                    </div>
+                    
+
+                    <hr>
+                </div>
+                <div style="clear: both"></div>
+                
+                <button type="button" class="btn btn-block btn-info">专利详情</button>
+                
+            </div>
+        </div>
+        <!-- /.user-block -->
+        
+    </div>

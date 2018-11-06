@@ -19,9 +19,10 @@ var getHtmlConfig = function(name){
 };
 var config = {
     entry: {
-        'common' : ['./src/pages/common/index.js'],
-        'detail' : ['./src/pages/detail/index.js'],
-        'search' : ['./src/pages/search/index.js'],
+        'common'       : ['./src/pages/common/index.js'],
+        'detail'       : ['./src/pages/detail/index.js'],
+        'search'       : ['./src/pages/search/index.js'],
+        'multi-search' : ['./src/pages/search/index.js']
     },
     output: {
         path      : path.resolve(__dirname,'./dist'),
@@ -73,7 +74,8 @@ var config = {
 
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('detail')),
-        new HtmlWebpackPlugin(getHtmlConfig('search'))
+        new HtmlWebpackPlugin(getHtmlConfig('search')),
+        new HtmlWebpackPlugin(getHtmlConfig('multi-search'))
     ],
     resolve: {
         alias : {

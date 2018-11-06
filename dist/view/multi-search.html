@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--公共的header信息-->
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="keywords" content="专利系统">
+<meta name="description" content="专利系统主页">
+<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--搜索页面的header-->
+<script src="//cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <title>专利系统index页面</title>
+<link href="/dist/css/common.css?01a9c83f3f6e4207acc3" rel="stylesheet"><link href="/dist/css/multi-search.css?01a9c83f3f6e4207acc3" rel="stylesheet"></head>
+
+<body>
+<!--顶栏用户登出页面-->
+<div class="nav">
+    <div class="w">
+        <div class="user-info">
+            <span class="user login">
+                <span class="link-text js-login">欢迎，
+                    <span class="username"></span>
+                </span>
+                <span class="link">退出</span>
+            </span>
+        </div>
+    </div>
+</div>
+<!--网页顶栏-->
+<div class="nav-simple">
+    <div class="w">
+        <a class="logo">科技文献检索分析<div class="logo-sec">Vanlink</div></a>
+        
+    </div>
+</div>
+<div class="page-wrap w">
+    <div class="content with-nav">
+        <!-- 多项搜索 -->
+<div class="col-md-12 hide" id="second_search">
+    <div id="search-block">
+        <div class="select-search-group">
+            <label>搜索项目选择</label><br>
+            <select id="select2-item" class="form-control select2" multiple="multiple" data-placeholder="在此选择搜索范围"
+            style="width: 70%;"></select>
+        </div>
+        <!-- data: [{id: 0, text: '专利id检索'}, {id: 1, text: '专利名称检索'}, {id: 2, text: '专利国家检索'},{id: 3, text: '专利类型检索'},{id: 4, text: '专利所有人检索'}] -->
+        <div class="form-group-id hide">
+                <label>专利id搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <input id="select2-item-id" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
+                style="width: 90%;"></input>
+        </div>
+        <div class="form-group-name hide">
+                <label>专利名称搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <input id="select2-item-name" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
+                style="width: 90%;"></input>
+        </div>
+        <div class="form-group-patentee hide">
+                <label>专利所有人搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <select id="select2-item-person" class="form-control select2" multiple="multiple" data-placeholder="专利所有人"
+                style="width: 80%;"></select>
+        </div>
+        <div class="form-group-nation hide">
+                <label>专利国家搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <select id="select2-item-nation" class="form-control select2" multiple="multiple" data-placeholder="专利所属国家"
+                style="width: 80%;"></select>
+        </div>
+        <div class="form-group-type hide">
+                <label>专利类型搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <select id="select2-item-type" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
+                style="width: 80%;"></select>
+        </div>
+        
+    </div>
+    <div class="card-footer">
+        <button id="multi-search-button" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索</button>
+        <button id="multi-search-button-second" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索：基于上次搜索的结果</button>
+    </div>
+</div>
+<!-- 多项选择结束-->
+    </div>
+</div>
+<!--网页footer-->
+<div class="footer">
+    <div class="w">
+        <div class="links">
+            <a class="link" href="http://www.baidu.com" target="_blank">
+                访问万林克主页
+            </a>
+        </div>
+        <p class="copyright">
+            Copyright © 2018 北京万林克技术有限公司 All Right Reserved
+        </p>
+    </div>
+</div>
+<script type="text/javascript" src="/dist/js/common.js?01a9c83f3f6e4207acc3"></script><script type="text/javascript" src="/dist/js/multi-search.js?01a9c83f3f6e4207acc3"></script></body>
+<script>
+    (function(){
+        this.click=function(data){
+            var selected = $(data);
+            var former = $('#side_chosen');
+            var standard_search = $('#standard_search');
+            var second_search = $('#second_search');
+            console.log(selected);
+            former.attr("id","not_chosen")
+            selected.attr("id","side_chosen");
+            if (data === '.button1')
+            {
+                standard_search.attr("class","col-md-12");
+                second_search.attr("class","col-md-12 hide");
+                $('.nav-side').attr("id","basic");
+
+            }else{
+                standard_search.attr("class","col-md-12 hide");
+                second_search.attr("class","col-md-12");
+                $('.nav-side').attr("id","prime");
+            }
+        }
+        window.SlideClick=this;
+    })();
+    (function(){
+        this.resultclick=function(data){
+            var selected = $(data);
+            var former = $('.nav-link-result.active');
+            selected.attr("class","nav-link-result active");
+            former.attr("class","nav-link-result");
+            console.log(selected);
+            console.log(former);
+        }
+        this.searchclick=function(data){
+            var selected = $(data);
+            var former = $('.nav-link-search.active');
+            selected.attr("class","nav-link-search active");
+            former.attr("class","nav-link-search");
+        }
+        this.showResult=function(){
+            console.log($('#select2-item').val());
+        }
+        window.Click=this;
+    })();
+</script>
+</html>

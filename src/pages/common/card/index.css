@@ -13,6 +13,13 @@
     margin-bottom: 20px;
 }
 
+.card-side {
+    width: 260px;
+    margin-left: 130px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
 .card > hr {
     margin-right: 0;
     margin-left: 0;

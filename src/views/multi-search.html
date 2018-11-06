@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%= require('html-loader!./layout/head-common.html') %>
+    <%= require('html-loader!./layout/head-search.html') %>
+    <title>专利系统index页面</title>
+</head>
+
+<body>
+<%= require('html-loader!./layout/nav.html') %>
+<%= require('html-loader!./layout/nav-simple.html') %>
+<div class="page-wrap-multi">
+    <div class="search-side row col-md-4">
+        <%= require('html-loader!./search/multi-search.html') %>
+    </div>
+    <div class="search-result row col-md-8">
+            <%= require('html-loader!./layout/search-result.html') %>
+    </div>
+</div>
+<%= require('html-loader!./layout/footer.html') %>
+</body>
+<script>
+    (function(){
+        this.click=function(data){
+            var selected = $(data);
+            var former = $('#side_chosen');
+            var standard_search = $('#standard_search');
+            var second_search = $('#second_search');
+            console.log(selected);
+            former.attr("id","not_chosen")
+            selected.attr("id","side_chosen");
+            if (data === '.button1')
+            {
+                standard_search.attr("class","col-md-12");
+                second_search.attr("class","col-md-12 hide");
+                $('.nav-side').attr("id","basic");
+
+            }else{
+                standard_search.attr("class","col-md-12 hide");
+                second_search.attr("class","col-md-12");
+                $('.nav-side').attr("id","prime");
+            }
+        }
+        window.SlideClick=this;
+    })();
+    (function(){
+        this.resultclick=function(data){
+            var selected = $(data);
+            var former = $('.nav-link-result.active');
+            selected.attr("class","nav-link-result active");
+            former.attr("class","nav-link-result");
+            console.log(selected);
+            console.log(former);
+        }
+        this.searchclick=function(data){
+            var selected = $(data);
+            var former = $('.nav-link-search.active');
+            selected.attr("class","nav-link-search active");
+            former.attr("class","nav-link-search");
+        }
+        this.showResult=function(){
+            console.log($('#select2-item').val());
+        }
+        window.Click=this;
+    })();
+    (function(){
+        $('.form-group').find('input[type=checkbox]').bind('click', function(){
+        $('.form-group').find('input[type=checkbox]').not(this).attr("checked", false);
+    });
+    })();
+</script>
+</html>

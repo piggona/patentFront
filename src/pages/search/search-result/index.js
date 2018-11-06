@@ -8,7 +8,7 @@ var _patent = require('utils/patent.js');
 var _result = require('html-loader!./result.html');
 
 var _searchResult = {
-    displayPack : [{publicId:'publicId',title:'title',patentee:'patentee',publicDate:'publicDate',IPC:'IPC'},{publicId:'publicId1',title:'title1',patentee:'patentee1',publicDate:'publicDate1',IPC:'IPC1'}],
+    displayPack : [{patent_uuid:'uspto_USD0746618S1',documentId:'publicId',title:'title',assignees:'patentee',publishedDate:'publicDate',uspc:'IPC'},{patent_uuid:'uspto_USD0746618S1',documentId:'publicId',title:'title',assignees:'patentee',publishedDate:'publicDate',uspc:'IPC'}],
     resultTemplate : _result,
     // publicId   : '',
     // title      : '',
@@ -18,7 +18,7 @@ var _searchResult = {
 
     result     : function(result){
         // 存储搜索结果,结果格式为json数组
-        this.displayPack = JSON.parse(result);
+        this.displayPack = result;
     },
 
     display    : function(){

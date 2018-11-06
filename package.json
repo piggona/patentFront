@@ -4,7 +4,7 @@
   "description": "\"vanlink patent sys\"",
   "main": "index.js",
   "scripts": {
-    "dev": "WEBPACK_ENV=dev webpack-dev-server --inline --port 8088",
+    "dev": "WEBPACK_ENV=dev webpack-dev-server --inline --host 0.0.0.0 --port 8088",
     "dev_win": "set WEBPACK_ENV=dev && webpack-dev-server --inline --port 8088",
     "dist": "WEBPACK_ENV=online webpack -p",
     "dist_win": "set WEBPACK_ENV=online && webpack -p"
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/piggona/patentFront#readme",
   "devDependencies": {
+    "bootstrap": "^4.1.0",
     "chart.js": "^2.7.3",
     "css-loader": "^1.0.0",
     "echarts": "^4.2.0-rc.2",
@@ -41,5 +42,7 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
   },
-  "dependencies": {}
+  "dependencies": {
+    "icheck": "^1.0.2"
+  }
 }

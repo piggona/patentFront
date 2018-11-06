@@ -1,0 +1,62 @@
+<!-- 多项搜索 -->
+<div class="col-md-12" id="second_search">
+    <div id="search-block">
+        <div class="select-search-group">
+            <label>搜索项目选择</label><br>
+            <select id="select2-item" class="form-control select2" multiple="multiple" data-placeholder="在此选择搜索范围"
+            style="width: 70%;"></select>
+        </div>
+        <!-- data: [{id: 0, text: '专利id检索'}, {id: 1, text: '专利名称检索'}, {id: 2, text: '专利国家检索'},{id: 3, text: '专利类型检索'},{id: 4, text: '专利所有人检索'}] -->
+        <div class="form-group-id hide">
+                <label>专利id搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <input id="select2-item-id" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
+                style="width: 90%;"></input>
+        </div>
+        <div class="form-group-name hide">
+                <label>专利名称搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <input id="select2-item-name" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
+                style="width: 90%;"></input>
+        </div>
+        <div class="form-group-patentee hide">
+                <label>专利所有人搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <select id="select2-item-person" class="form-control select2" multiple="multiple" data-placeholder="专利所有人"
+                style="width: 80%;"></select>
+        </div>
+        <div class="form-group-nation hide">
+                <label>专利国家搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <select id="select2-item-nation" class="form-control select2" multiple="multiple" data-placeholder="专利所属国家"
+                style="width: 80%;"></select>
+        </div>
+        <div class="form-group-type hide">
+                <label>专利类型搜索</label><br>
+                <select class="multi-search">
+                    <option value="and">and</option>
+                    <option value="or">or</option>
+                </select>
+                <select id="select2-item-type" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
+                style="width: 80%;"></select>
+        </div>
+        
+    </div>
+    <div class="card-footer">
+        <button id="multi-search-button" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索</button>
+        <button id="multi-search-button-second" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索：基于上次搜索的结果</button>
+    </div>
+</div>
+<!-- 多项选择结束-->

@@ -25,3 +25,121 @@ select.multi-search {
   #search-block {
       padding-bottom: 3rem;
   }
+
+  /*
+ * Component: Products List
+ * ------------------------
+ */
+.products-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .products-list > .item {
+    border-radius: 0.25rem;
+    padding: 10px 0;
+    background: #ffffff;
+  }
+  
+  .products-list > .item::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+  
+  .products-list .product-img {
+    float: left;
+  }
+  
+  .products-list .product-img img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .products-list .product-info {
+    margin-left: 60px;
+  }
+  
+  .products-list .product-title {
+    font-weight: 600;
+  }
+  
+  .products-list .product-description {
+    display: block;
+    color: #6c757d;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .product-list-in-card > .item {
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  .product-list-in-card > .item:last-of-type {
+    border-bottom-width: 0;
+  }
+
+  .btn-info {
+    color: #ffffff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+    height: 30px;
+    line-height: 0;
+  }
+  
+  .btn-info:hover {
+    color: #ffffff;
+    background-color: #138496;
+    border-color: #117a8b;
+  }
+  
+  .btn-info:focus, .btn-info.focus {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+  }
+  
+  .btn-info.disabled, .btn-info:disabled {
+    color: #ffffff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+  }
+  
+  .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active,
+  .show > .btn-info.dropdown-toggle {
+    color: #ffffff;
+    background-color: #117a8b;
+    border-color: #10707f;
+  }
+  
+  .btn-info:not(:disabled):not(.disabled):active:focus, .btn-info:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-info.dropdown-toggle:focus {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+  }
+
+  .input-group {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      width: 100%;
+  }
+  .search-result {
+    float: right;
+  }
+  .top-button {
+    margin-left: 130px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+  }
+  .top-btn {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #212121;
+  }
+  .top-btn:hover {
+    color: #90A4AE;
+  }
+

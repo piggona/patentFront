@@ -1,0 +1,51 @@
+<!--搜索条件框-->
+<div class="card card-default">
+    <!--头信息：改为选择块-->
+    <div class="card-header">
+            <ul class="nav nav-pills col-md-9">
+                <li class="nav-item"><button class="nav-link-search" id="searchpatent" data-toggle="tab" onclick="Click.searchclick('#searchpatent')">专利查询</button></li>
+                <li class="nav-item"><button class="nav-link-search active" id="searchpaper" data-toggle="tab" onclick="Click.searchclick('#searchpaper')">论文查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchfound" data-toggle="tab" onclick="Click.searchclick('#searchfound')">基金查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchcorp" data-toggle="tab" onclick="Click.searchclick('#searchcorp')">机构查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchperson" data-toggle="tab" onclick="Click.searchclick('#searchperson')">人员查询</button></li>
+            </ul>
+        <!--/*框选项*/-->
+        <!--框选项结束-->
+    </div>
+    <!--头信息结束-->
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <!--搜索项选择器-->
+                <section class="content">
+                    <div class="container-fluid">
+                        <!-- 简单搜索 -->
+                        <div class="col-md-12" id="standard_search">
+                            <div class="form-group">
+                                            <div class="search-con">
+                                                        <!-- <select id="simple-search-type">
+                                                                <option>专利号搜索</option>
+                                                                <option>名称搜索</option>
+                                                                <option>全文搜索</option>
+                                                        </select> -->
+                                                    <input class="search-input" id="simple-search" placeholder="
+                                                    请输入搜索内容"/>
+                                                    <button class="btn search-btn" id="search-btn">搜索</button>
+                                            </div>        
+                                <!-- <select id="select2-choose" class="form-control select2" multiple="multiple" data-placeholder="请选择想要添加的搜索选项"
+                                        style="width: 100%;">
+                                </select> -->
+                            </div>
+                        </div>
+                        <a href="./multi-search.html" style="float: right">高级搜索></a>
+                        <!-- 简单搜索结束 -->
+                    </div>
+                    <!-- /.row -->
+                </section>
+                <!--搜索器选择项结束-->
+            </div>
+        </div>
+        <!-- /.tab-content -->
+    </div>
+</div>
+<!--搜索框结束-->

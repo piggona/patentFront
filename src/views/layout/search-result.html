@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div style="width: 800px">
     <div class="card card-default">
         <div class="card-header p-2">
             <ul class="nav nav-pills">
@@ -6,18 +6,16 @@
                 <li class="nav-item"><button class="nav-link-result active" id="resultcors" data-toggle="tab" onclick="Click.resultclick('#resultcors')">相关度</button></li>
             </ul>
         </div><!-- /.card-header -->
-        <div class="card-body">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table m-0">
                         <thead>
                         <tr>
-                            <th>publicID</th>
+                            <th>documentID</th>
                             <th>title</th>
-                            <th>patentee</th>
-                            <th>publicDate</th>
-                            <th>IPC</th>
-                            <th>detail</th>
+                            <th>assignees</th>
+                            <th>publishedDate</th>
+                            <th>uspc</th>
                         </tr>
                         </thead>
                         <tbody id="search-result">
@@ -27,7 +25,6 @@
                 </div>
                     <!-- /.table-responsive -->
             </div>
-        </div><!-- /.card-body -->
     </div>
     <!-- /.nav-tabs-custom -->
 </div>

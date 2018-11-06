@@ -85,6 +85,11 @@ input[type='checkbox']{
     background: url(/distassets/images/ee541dccb5cd8240aaf3deabcba6a4f9.gif) no-repeat;
 
 }
+.page-wrap {
+    width: 680px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
 .footer{
     padding-bottom: 10px;
 }

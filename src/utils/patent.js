@@ -9,13 +9,15 @@ var _patent = {
     */
     request : function(param){
         $.ajax({
-            type     : param.method || 'get',
+            type     : param.method || 'post',
             url      : param.url    || '',
             dataType : param.type   || 'json',
             data     : param.data   || '',
+            crossDomain : true,
             success  : function(res){
                 // ajax请求的回调函数
                 var _this = this;
+                param.success(res);
                 if (0 === res.status){
                     // 登录成功，若param的success是function类型则向服务器返回data和msg对象（在发送请求的时候看情况写向后端传递信息的函数)
                     typeof param.success === 'function' && param.success(res.data,res.msg);

@@ -85,3 +85,25 @@ input[type='checkbox']{
     background: url(../../images/icon/loading.gif) no-repeat;
 
 }
+.page-wrap {
+    width: 680px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+.page-wrap-multi {
+    margin-top: 40px;
+    margin-bottom: 150px;
+    
+}
+.with-nav-side {
+    width: 480px;
+}
+.search-side {
+    
+    margin: 0;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0%;
+}

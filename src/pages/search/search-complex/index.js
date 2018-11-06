@@ -6,12 +6,21 @@
 
 
 require('./index.css');
+require('bootstrap/js/src/collapse.js');
+var _select2 = require('pages/search/select2/generate.js');
 var _patent = require('utils/patent.js');
+var _searchResult = require('pages/search/search-result/index.js');
 
 var header_multi = {
-    search_phrase : null,
+    search_phrase : {"type": "prime","sort": "relativity", "from": 0, "size": 10, "query": [{"attr": "_all","query": "","logic": ""},{"attr": "patentType","query": "","logic": ""},{"attr": "inventor.name.raw","query": "","logic": ""},{"attr": "assignee.name.raw","query": "","logic": ""},{"attr": "classification.uspc.raw","query": "","logic": ""},{"attr": "country","query": "","logic": ""},{"attr": "publishedDate","query": "","logic": ""}]},
     init : function(){
         this.bindEvent();
+    },
+    pageinit : function(){
+        var basic_query = {"type": "basic","query": ""};
+        var keyword = _patent.getUrlParam("keyword");
+        basic_query["query"] = keyword;
+        this.searchSubmit(basic_query);
     },
     onload : function(){
         var keyword= _patent.getUrlParam('keyword');
@@ -24,50 +33,123 @@ var header_multi = {
         // 两个回调函数
         var _this = this;
         $('#multi-search-button').click(function(){
-            _this.searchSubmit();
+            _this.getAllSubmit();
+            _this.searchSubmit(_this.search_phrase);
         });
-        $('#multi-search-button-second').click(function(){
-            _this.secondSearchSubmit();
+        $('#reset-button').click(function(){
+            _this.resetAll();
+        })
+        $('#patent-btn').click(function(){
+            _this.getPatentSubmit();
+            _this.searchSubmit(_this.search_phrase);
         });
+        $('#inventor-btn').click(function(){
+            _this.getInventorSubmit();
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('#assignee-btn').click(function(){
+            _this.getAssigneeSubmit();
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('#class-btn').click(function(){
+            _this.getClassSubmit();
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('#select2-item-nation').change(function(){
+            _this.getLocationSubmit();
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('#gov-btn').click(function(){
+            _this.getGovSubmit();
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('#date-btn').click(function(){
+            _this.getDateSubmit();
+            _this.searchSubmit(_this.search_phrase);
+        })
+    },
+    getPatentSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-patent .form-group').find('input[type=checkbox]:checked').val();
+        var patent_type = $('#multi-search-body-patent .patent-type').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-patent .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[0]['query'] =  $.trim(query[0]['query']+' '+patent_query);
+        query[0]['logic'] = search_type;
+        query[1]['query'] = patent_type;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
+    },
+    getInventorSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-inventor .form-group').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-inventor .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[2]['query'] =  $.trim(query[2]['query']+' '+patent_query);
+        query[2]['logic'] = search_type;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase); 
+    },
+    getAssigneeSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-assignee .form-group').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-assignee .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[3]['query'] =  $.trim(query[3]['query']+' '+patent_query);
+        query[3]['logic'] = search_type;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
+    },
+    getClassSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-class .form-group').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-class .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[4]['query'] =  patent_query;
+        // query[4]['query'] = search_type;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
+    },
+    getLocationSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-location .form-group').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-location .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[5]['query'] =  patent_query;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
+    },
+    getDateSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-date .form-group').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-date .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[6]['query'] =  patent_query;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
+    },
+    getGovSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-gov .form-group').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-gov .form-control').val());
+        var query = _this.search_phrase['query'];
+        // query[10]['query'] =  patent_query;
+        // query[11]['query'] = search_type;
+        
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
     },
     //搜索所有的输入,使用id查找，并提交。
-    searchSubmit : function(){
-        var submit_data = {};
-        var keyword = $.trim($('#search-input').val());
-        var search_mode = $('.nav-side').attr("id");
-        var search_index = $('.nav-link-search.active').attr("id");
-        var search_body = {};
-        if(!(selected_item === null)){
-            // 向data加入keyword
-            submit_data['search_mode'] = search_mode;
-            submit_data['search_index'] = search_index;
-
-            // id搜索结果
-            search_body['method'] = $('.form-group-id .multi-search').val();
-            search_body['value'] = $('#select2-item-id').val();
-            submit_data['search_id'] = search_body;
-
-            // 名称搜索结果
-            search_body['method'] = $('.form-group-name .multi-search').val();
-            search_body['value'] = $('#select2-item-name').val();
-            submit_data['search_name'] = search_body;
-
-            // 专利所有人搜索
-            search_body['method'] = $('.form-group-patentee .multi-search').val();
-            search_body['value'] = $('#select2-item-patentee').val();
-            submit_data['search_patentee'] = search_body;
-
-            // 专利国家搜索
-            search_body['method'] = $('.form-group-nation .multi-search').val();
-            search_body['value'] = $('#select2-item-nation').val();
-            submit_data['search_nation'] = search_body;
-
-            // 专利类型搜索
-            search_body['method'] = $('.form-group-type .multi-search').val();
-            search_body['value'] = $('#select2-item-type').val();
-            submit_data['search_type'] = search_body;
-        }
-        if ($.isEmptyObject(submit_data))
+    searchSubmit : function(search_phrase){
+        console.log(search_phrase);
+        var _this = this;
+        if ($.isEmptyObject(search_phrase))
         {
             //如果还没有填
             _patent.goHome();
@@ -75,23 +157,65 @@ var header_multi = {
         else{
             _patent.request({
                 //发data到服务器地址
-                url : 'http://wanlinke.com/9200',
-                data : submit_data,
+                url : 'http://192.168.1.123:8000/patentapi/',
+                method : 'post',
+                data : JSON.stringify(search_phrase),
                 success: function(res){
+                    console.log(res);
                     if(res){
                         _searchResult.result(res.data);
                         _searchResult.display();
                     }
-                    console.log(res);
                 },
                 error: function(err){
                     console.log(err);
                 }
             });
         }
+        console.log(_searchResult.displayPack);
     },
-    secondSearchSubmit : function(){
+    resetAll : function(){
+        _searchResult.result('{}');
+        _searchResult.display();
+        this.search_phrase = {'type': 'prime','sort': 'relativity', 'from': 0, 'size': 10, 'query': [{'attr': 'patent','query': '','logic': ''},{'attr': 'patent_type','query': '','logic': ''},{'attr': 'inventor','query': '','logic': ''},{'attr': 'assignee','query': '','logic': ''},{'attr': 'patentClass','query': '','logic': ''},{'attr': 'patentClassSearch','query': '','logic': ''},{'attr': 'nation','query': '','logic': ''},{'attr': 'nationType','query': '','logic': ''},{'attr': 'date','query': '','logic': ''},{'attr': 'dateType','query': '','logic': ''},{'attr': 'gov','query': '','logic': ''},{'attr': 'govType','query': '','logic': ''}]};
+    },
+    getAllSubmit : function(){
+        var _this = this;
+        var search_type = $('#multi-search-body-patent .form-group').find('input[type=checkbox]:checked').val();
+        var patent_type = $('#multi-search-body-patent .patent-type').find('input[type=checkbox]:checked').val();
+        var patent_query = $.trim($('#multi-search-body-patent .form-control').val());
+        var query = _this.search_phrase['query'];
+        query[0]['query'] =  $.trim(patent_query);
+        query[0]['logic'] = search_type;
+        query[1]['query'] = patent_type;
+        search_type = $('#multi-search-body-inventor .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-inventor .form-control').val());
+        query[2]['query'] =  $.trim(patent_query);
+        query[2]['logic'] = search_type;
+        search_type = $('#multi-search-body-assignee .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-assignee .form-control').val());
+        query[3]['query'] =  $.trim(patent_query);
+        query[3]['logic'] = search_type;
+        search_type = $('#multi-search-body-class .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-class .form-control').val());
+        query[5]['query'] =  patent_query;
+        query[4]['query'] = search_type;
+        search_type = $('#multi-search-body-location .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-location .form-control').val());
+        query[6]['query'] =  patent_query;
+        query[7]['query'] = search_type;
+        search_type = $('#multi-search-body-date .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-date .form-control').val());
+        query[8]['query'] =  patent_query;
+        query[9]['query'] = search_type;
+        search_type = $('#multi-search-body-gov .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-gov .form-control').val());
+        query = _this.search_phrase['query'];
+        query[10]['query'] =  patent_query;
+        query[11]['query'] = search_type;
 
+        _this.search_phrase['query'] = query;
+        console.log(_this.search_phrase);
     }
 };
 $('#select2-item').change(function(){
@@ -120,3 +244,4 @@ $('#select2-item').change(function(){
     }   
 });
 header_multi.init();
+header_multi.pageinit();

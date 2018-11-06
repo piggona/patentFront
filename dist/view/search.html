@@ -13,7 +13,7 @@
 <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
     <title>专利系统index页面</title>
-<link href="/dist/css/common.css?0be2af92be808f34c97d" rel="stylesheet"><link href="/dist/css/search.css?0be2af92be808f34c97d" rel="stylesheet"></head>
+<link href="/dist/css/common.css?01a9c83f3f6e4207acc3" rel="stylesheet"><link href="/dist/css/search.css?01a9c83f3f6e4207acc3" rel="stylesheet"></head>
 
 <body>
 <!--顶栏用户登出页面-->
@@ -32,20 +32,11 @@
 <!--网页顶栏-->
 <div class="nav-simple">
     <div class="w">
-        <a class="logo"><div class="space"><br></div>科技文献检索分析<br><div class="logo-sec">Vanlink</div></a>
+        <a class="logo">科技文献检索分析<div class="logo-sec">Vanlink</div></a>
         
     </div>
 </div>
 <div class="page-wrap w">
-    <!--边栏：选择查询模式-->
-<ul class="nav-side" id="basic">
-    <li class="nav-item">
-        <button class="side_link button1" id="side_chosen" onclick="SlideClick.click('.button1')">基础查询</button>
-    </li>
-    <li class="nav-item">
-        <button class="side_link button2" id="not_chosen" onclick="SlideClick.click('.button2')">高级查询</button>
-    </li>
-</ul>
     <div class="content with-nav">
         <!--搜索条件框-->
 <div class="card card-default">
@@ -59,10 +50,6 @@
                 <li class="nav-item"><button class="nav-link-search" id="searchperson" data-toggle="tab" onclick="Click.searchclick('#searchperson')">人员查询</button></li>
             </ul>
         <!--/*框选项*/-->
-        <div class="card-tools col-md-3">
-            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-        </div>
         <!--框选项结束-->
     </div>
     <!--头信息结束-->
@@ -76,85 +63,22 @@
                         <div class="col-md-12" id="standard_search">
                             <div class="form-group">
                                             <div class="search-con">
-                                                        <select id="simple-search-type">
+                                                        <!-- <select id="simple-search-type">
                                                                 <option>专利号搜索</option>
                                                                 <option>名称搜索</option>
                                                                 <option>全文搜索</option>
-                                                        </select>
+                                                        </select> -->
                                                     <input class="search-input" id="search" placeholder="
                                                     请输入搜索内容"/>
                                                     <button class="btn search-btn" id="search-btn">搜索</button>
-                                            </div>
-
+                                            </div>        
                                 <!-- <select id="select2-choose" class="form-control select2" multiple="multiple" data-placeholder="请选择想要添加的搜索选项"
                                         style="width: 100%;">
                                 </select> -->
                             </div>
                         </div>
+                        <a href="./multi-search.html" style="float: right">高级搜索></a>
                         <!-- 简单搜索结束 -->
-
-                        <!-- 多项搜索 -->
-                        <div class="col-md-12 hide" id="second_search">
-                            <div id="search-block">
-                                <div class="select-search-group">
-                                    <label>搜索项目选择</label><br>
-                                    <select id="select2-item" class="form-control select2" multiple="multiple" data-placeholder="在此选择搜索范围"
-                                    style="width: 70%;"></select>
-                                </div>
-                                <!-- data: [{id: 0, text: '专利id检索'}, {id: 1, text: '专利名称检索'}, {id: 2, text: '专利国家检索'},{id: 3, text: '专利类型检索'},{id: 4, text: '专利所有人检索'}] -->
-                                <div class="form-group-id hide">
-                                        <label>专利id搜索</label><br>
-                                        <select class="multi-search">
-                                            <option value="and">and</option>
-                                            <option value="or">or</option>
-                                        </select>
-                                        <input id="select2-item-id" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
-                                        style="width: 90%;"></input>
-                                </div>
-                                <div class="form-group-name hide">
-                                        <label>专利名称搜索</label><br>
-                                        <select class="multi-search">
-                                            <option value="and">and</option>
-                                            <option value="or">or</option>
-                                        </select>
-                                        <input id="select2-item-name" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
-                                        style="width: 90%;"></input>
-                                </div>
-                                <div class="form-group-patentee hide">
-                                        <label>专利所有人搜索</label><br>
-                                        <select class="multi-search">
-                                            <option value="and">and</option>
-                                            <option value="or">or</option>
-                                        </select>
-                                        <select id="select2-item-person" class="form-control select2" multiple="multiple" data-placeholder="专利所有人"
-                                        style="width: 80%;"></select>
-                                </div>
-                                <div class="form-group-nation hide">
-                                        <label>专利国家搜索</label><br>
-                                        <select class="multi-search">
-                                            <option value="and">and</option>
-                                            <option value="or">or</option>
-                                        </select>
-                                        <select id="select2-item-nation" class="form-control select2" multiple="multiple" data-placeholder="专利所属国家"
-                                        style="width: 80%;"></select>
-                                </div>
-                                <div class="form-group-type hide">
-                                        <label>专利类型搜索</label><br>
-                                        <select class="multi-search">
-                                            <option value="and">and</option>
-                                            <option value="or">or</option>
-                                        </select>
-                                        <select id="select2-item-type" class="form-control select2" multiple="multiple" data-placeholder="专利所属类型"
-                                        style="width: 80%;"></select>
-                                </div>
-                                
-                            </div>
-                            <div class="card-footer">
-                                <button id="multi-search-button" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索</button>
-                                <button id="multi-search-button-second" type="submit" class="btn btn-primary" onclick="Click.showResult()">搜索：基于上次搜索的结果</button>
-                            </div>
-                        </div>
-                        <!-- 多项选择结束-->
                     </div>
                     <!-- /.row -->
                 </section>
@@ -165,39 +89,6 @@
     </div>
 </div>
 <!--搜索框结束-->
-        <div class="col-md-12">
-    <div class="card card-default">
-        <div class="card-header p-2">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><button class="nav-link-result" id="resultdate" data-toggle="tab" onclick="Click.resultclick('#resultdate')">日期</button></li>
-                <li class="nav-item"><button class="nav-link-result active" id="resultcors" data-toggle="tab" onclick="Click.resultclick('#resultcors')">相关度</button></li>
-            </ul>
-        </div><!-- /.card-header -->
-        <div class="card-body">
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table m-0">
-                        <thead>
-                        <tr>
-                            <th>publicID</th>
-                            <th>title</th>
-                            <th>patentee</th>
-                            <th>publicDate</th>
-                            <th>IPC</th>
-                            <th>detail</th>
-                        </tr>
-                        </thead>
-                        <tbody id="search-result">
-                        
-                        </tbody>
-                    </table>
-                </div>
-                    <!-- /.table-responsive -->
-            </div>
-        </div><!-- /.card-body -->
-    </div>
-    <!-- /.nav-tabs-custom -->
-</div>
     </div>
 </div>
 <!--网页footer-->
@@ -213,7 +104,7 @@
         </p>
     </div>
 </div>
-<script type="text/javascript" src="/dist/js/common.js?0be2af92be808f34c97d"></script><script type="text/javascript" src="/dist/js/search.js?0be2af92be808f34c97d"></script></body>
+<script type="text/javascript" src="/dist/js/common.js?01a9c83f3f6e4207acc3"></script><script type="text/javascript" src="/dist/js/search.js?01a9c83f3f6e4207acc3"></script></body>
 <script>
     (function(){
         this.click=function(data){
