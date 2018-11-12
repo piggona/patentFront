@@ -34,6 +34,7 @@ var header_multi = {
         var _this = this;
         $('#multi-search-button').click(function(){
             _this.getAllSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#reset-button').click(function(){
@@ -41,32 +42,59 @@ var header_multi = {
         })
         $('#patent-btn').click(function(){
             _this.getPatentSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#inventor-btn').click(function(){
             _this.getInventorSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#assignee-btn').click(function(){
             _this.getAssigneeSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#class-btn').click(function(){
             _this.getClassSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#select2-item-nation').change(function(){
             _this.getLocationSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#gov-btn').click(function(){
             _this.getGovSubmit();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         });
         $('#date-btn').click(function(){
             _this.getDateSubmit();
+            _this.search_phrase["from"]=0;
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('#next-page').click(function(){
+            _this.nextPage();
+            _this.searchSubmit(_this.search_phrase);
+        });
+        $('.nav-link-result').click(function(){
+            _this.changeSort();
+            _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         })
+    },
+    changeSort : function(){
+        var _this = this;
+        console.log($('.nav-link-result.active').attr('value'));
+        _this.search_phrase['sort'] = $('.nav-link-result.active').attr('value');
+    },
+    nextPage : function(){
+        var _this = this;
+        var previous = _this.search_phrase['from'];
+        _this.search_phrase['from'] = previous+_this.search_phrase['size'];
+        console.log(_this.search_phrase);
     },
     getPatentSubmit : function(){
         var _this = this;
@@ -157,7 +185,7 @@ var header_multi = {
         else{
             _patent.request({
                 //发data到服务器地址
-                url : 'http://192.168.1.123:8000/patentapi/',
+                url : 'http://10.210.17.107:8000/api/patent/search/',
                 method : 'post',
                 data : JSON.stringify(search_phrase),
                 success: function(res){

@@ -22,7 +22,9 @@ var config = {
         'common'       : ['./src/pages/common/index.js'],
         'detail'       : ['./src/pages/detail/index.js'],
         'search'       : ['./src/pages/search/index.js'],
-        'multi-search' : ['./src/pages/search/index.js']
+        'multi-search' : ['./src/pages/search/index.js'],
+        'person'       : ['./src/pages/person/index.js'],
+        'assignee'     : ['./src/pages/assignee/index.js']
     },
     output: {
         path      : path.resolve(__dirname,'./dist'),
@@ -75,7 +77,9 @@ var config = {
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('detail')),
         new HtmlWebpackPlugin(getHtmlConfig('search')),
-        new HtmlWebpackPlugin(getHtmlConfig('multi-search'))
+        new HtmlWebpackPlugin(getHtmlConfig('multi-search')),
+        new HtmlWebpackPlugin(getHtmlConfig('person')),
+        new HtmlWebpackPlugin(getHtmlConfig('assignee'))
     ],
     resolve: {
         alias : {

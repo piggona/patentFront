@@ -23,8 +23,9 @@ var header = {
             _this.searchSubmit();
         });
         //输入提交后，做搜索提交
-        $('#search-input').keyup(function(e){
-            if(e.keycode === 13){
+        $(document).keyup(function(e){
+            var key = e.which;
+            if(key === 13){
                 _this.searchSubmit();
             }
         });

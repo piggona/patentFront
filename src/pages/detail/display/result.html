@@ -1,11 +1,12 @@
 <div class="post">
         <div class="user-block">
-            <div class="detail-title">
-                <span class="username">
+            <div class="detail-title" style="width: 70%;">
+                <span class="username" style="width: 50%">
                     <a class="patent-name" href="#">{{ title }}</a>
                      
                 </span>
-                <span class="description">Shared publicly - {{ documentDate.raw }}</span>
+                <br>
+                <span class="description" style="width: 50%; float:right;">Shared publicly - {{ documentDate.raw }}</span>
             </div>
             
 
@@ -14,6 +15,7 @@
                     <p>
                         {{ description.DRAWING_DESC.plain }}
                     </p>
+                    <a href="javascript:void(0)" id="full-text">详情...</a>
                 </div>
                 <div class="apply display-bottom" style="float :right">
                         <strong><i class="fa fa-anchor mr-1"></i> 申请号码</strong>
@@ -55,17 +57,26 @@
                         <strong><i class="fa fa-file-text-o mr-1"></i> CLASS TYPE</strong>
                         <br><br>
                         <p class="text-muted">ipc：</p>
-                        <p class="text-muted">{{ classification_name.ipc }}</p>
+                        <p class="text-muted">
+                        {{#classification_name.ipc}}
+                            {{content}};<br>
+                        {{/classification_name.ipc}}</p>
                         <p class="text-muted">uspc：</p>
-                        <p class="text-muted">{{ classification_name.uspc }}</p>
+                        <p class="text-muted">
+                        {{#classification_name.uspc}}
+                            {{content}};
+                        {{/classification_name.uspc}}</p>
                         <p class="text-muted">cpc：</p>
-                        <p class="text-muted">{{ classification_name.cpc }}</p>
+                        <p class="text-muted">
+                        {{#classification_name.cpc}}
+                            {{content}};<br>
+                        {{/classification_name.cpc}}</p>
                     </div>
                     <div class="display-bottom"  style="float: left;">
                             <strong><i class="fa fa-user mr-1"></i> 申请（专利权）人</strong>
                             <br><br>
                             <p class="text-muted">
-                                <span class="tag tag-success">{{ assignees_name }}</span>
+                                <span class="tag tag-success"><a id="display-name" href="assignee.html?assignee={{assignees_name}}">{{ assignees_name }}</a></span>
                             </p>
                         
                         
@@ -74,16 +85,17 @@
                             <strong><i class="fa fa-file-text-o mr-1"></i> 发明（设计）人</strong>
                             <br><br>
 
-                            <p class="text-muted">{{ inventor_name }}</p>
+                            <p class="text-muted">
+                            {{#inventor_name}}
+                                <a id="display-name" href="person.html?inventor={{name}}">{{name}}</a><br>
+                            {{/inventor_name}}
+                            </p>
                     </div>
                     
 
                     <hr>
                 </div>
-                <div style="clear: both"></div>
-                
-                <button type="button" class="btn btn-block btn-info">专利详情</button>
-                
+                <div style="clear: both"></div>                
             </div>
         </div>
         <!-- /.user-block -->

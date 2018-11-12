@@ -140,6 +140,11 @@ select.multi-search {
     color: #212121;
   }
   .top-btn:hover {
-    color: #90A4AE;
+    color: #99A3A4;
+  }
+  .next-page {
+    width: 100%;
+    background: #99A3A4;
+    font-weight: inherit;
   }
 

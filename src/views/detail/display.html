@@ -1,5 +1,5 @@
 <!--搜索条件框-->
-<div class="card card-default">
+<div class="card card-default" id="patent-display">
         <!--头信息：改为选择块-->
         <div class="card-header">
             <ul class="nav nav-pills col-md-9">
@@ -7,108 +7,19 @@
             </ul>
             <!--/*框选项*/-->
             <div class="card-tools col-md-3">
-                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                <button type="button" class="btn btn-tool" data-toggle="collapse" href="#patent-body-display" data-parent="#patent-display"><i class="fa fa-remove"></i></button>
                 <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             </div>
             <!--框选项结束-->
         </div>
         <!--头信息结束-->
-        <div class="card-body">
+        <div class="card-body" id="patent-body-display">
             
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
                     <!--搜索项选择器-->
                     <section class="content">
                         <div class="container-fluid" id="display-container">
-                             <!-- Post -->
-                    <div class="post">
-                            <div class="user-block">
-                                <div class="detail-title">
-                                    <span class="username">
-                                        <a class="patent-name" href="#">{{ title }}</a>
-                                         
-                                    </span>
-                                    <span class="description">Shared publicly - {{ documentDate.raw }}</span>
-                                </div>
-                                
-
-                                <div class="card-body">
-                                    <div class="detail-text">
-                                        <p>
-                                            {{ description.DRAWING_DESC.plain }}一种成像装置(1)，包括：成像主体(11)以及设于成像主体(11)上的镜头卡口组件(12)，镜头卡口组件包括锁配部(121)、第一配合面(1241)以及设于第一配合面(1241)上的电连接部(122)；其中，当镜头(2)通过与锁配部(121)配合装配于成像装置(1)时，第一配合面(1241)贴合于镜头的第二配合面(211)，电连接部(122)与镜头的电配合部(22)电性连接。本发明中将成像装置上与电连接部设于与镜头配合的配合面上，并通过机械卡接的方式以使镜头可以固定于成像装置上，如此可以简化成像装置的内部结构，能够提高成像装置内空间利用率，有利于减小成像装置的体积。此外，还公开了包括上述成像装置(1)的相机模组(10)和云台相机(100)。
-                                        </p>
-                                    </div>
-                                    <div class="apply display-bottom" style="float :right">
-                                            <strong><i class="fa fa-anchor mr-1"></i> 申请号码</strong>
-                                            <br><br>
-    
-                                            <p class="text-muted">
-                                                {{applicationId}}
-                                            </p>
-                                            <strong><i class="fa fa-calendar mr-1"></i> 申请日期</strong>
-                                            <br><br>
-            
-                                            <p class="text-muted">
-                                                {{applicationDate.raw}}
-                                            </p>
-            
-                                            <hr>
-                                    </div>
-
-                                    <div class="public display-bottom" style="float: right">
-                                            <strong><i class="fa fa-map-marker mr-1"></i> 公开号</strong>
-                                            <br><br>
-    
-                                            <p class="text-muted">{{documentId}}</p>
-            
-                                            <strong><i class="fa fa-calendar mr-1"></i> 公开（公告）日期</strong>
-                                            <br><br>
-            
-                                            <p class="text-muted">{{publishedDate.raw}}</p>
-            
-                                            <hr>
-            
-                                    </div>
-                                    <div style="clear: both"></div>
-                                    <br><br><br><br>
-                                    
-    
-                                    <div class="bottom">
-                                        <div class="display-bottom" style="float: left; width: 300px">
-                                            <strong><i class="fa fa-file-text-o mr-1"></i> CLASS TYPE</strong>
-                                            <br><br>
-                                            <p class="text-muted">uspc：</p>
-                                            <p class="text-muted">{{ classification.uspc }}206409,206494,206554,221 45,221 63,2291231,229212,D 6515,D 9414,D 9415,D 9416,D 9418,D 9419,D 9433,D 9434,D 9435,D 9456,D 9457,D 9499,D 9668,D 9715,D 9722,D 9731,D 9737</p>
-                                        </div>
-                                        <div class="display-bottom"  style="float: left;">
-                                                <strong><i class="fa fa-user mr-1"></i> 申请（专利权）人</strong>
-                                                <br><br>
-                                                <p class="text-muted">
-                                                    <span class="tag tag-success">{{ assignees.uuid }}北京市万林克技术有限公司</span>
-                                                </p>
-                                            
-                                            
-                                        </div>
-                                        <div class="display-bottom" style="float: left;">
-                                                <strong><i class="fa fa-file-text-o mr-1"></i> 发明（设计）人</strong>
-                                                <br><br>
-
-                                                <p class="text-muted">{{ inventor_name }}辛泽西，何旭东</p>
-                                        </div>
-                                        
-        
-                                        <hr>
-                                    </div>
-                                    <div style="clear: both"></div>
-                                    
-                                    <button type="button" class="btn btn-block btn-info">专利详情</button>
-                                    
-                                </div>
-                            </div>
-                            <!-- /.user-block -->
-                            
-                        </div>
-                        <!-- /.post -->
                         </div>
                         <!-- /.row -->
                     </section>

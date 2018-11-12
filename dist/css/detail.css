@@ -123,7 +123,8 @@ a:hover{
 
 
 .display-bottom {
-    margin-right: 3rem;
+    margin-right: 5rem;
+    border-top: 1px;
 }
 .detail-text {
     float: left;
@@ -135,7 +136,46 @@ a:hover{
 .btn-info {
     width: 120px;
     float: right;
-}.direct-chat-message {
+}
+.text-muted {
+    color: #34495E;
+}
+#display-name {
+    color: #34495E;
+    text-decoration: black;
+}
+#display-name:hover {
+    color: #1A5276;
+}
+.patent-info {
+    background: #34495E;
+}
+.login-panel{
+    width:800px;
+    height:700px;
+    background-color:#EAECEE;
+    border-radius:10px;
+    margin:0 auto;
+    top:15%;
+    position:relative;
+}
+.elastic-layer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+.close{
+    display: none;
+}
+
+.blur{
+    filter:blur(2px);
+    -webkit-filter:blur(2px);
+}
+.direct-chat-message {
     -webkit-transform: translate(0,0);
     -ms-transform: translate(0,0);
     transform: translate(0,0);
@@ -143,6 +183,38 @@ a:hover{
     height: 250px;
     overflow: auto;
     transition: transform .5s ease-in-out;
+}
+.most-cited-patents {
+    margin-top: 2rem;
+}
+.sub-title {
+    font-weight: bold;
+    border-bottom: 2px;
+    border-color: #515A5A;
+}
+.relationship-graph {
+
+}
+#cited-title {
+    color: #5D6D7E;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration-line: underline;
+}
+#cited-title:hover {
+    color: #1F618D;
+}
+#cited-num {
+    color: #B2BABB;
+}
+#graph-text {
+    color: #283747;
+    font-size: 1.5rem;
+}
+.static-block {
+    position: relative;
+    display: flex;
+    margin-top: 4rem;
 }/*搜索框*/
 select {
     /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
@@ -229,6 +301,13 @@ select {
     margin-bottom: 20px;
 }
 
+.card-side {
+    width: 260px;
+    margin-left: 130px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
 .card > hr {
     margin-right: 0;
     margin-left: 0;

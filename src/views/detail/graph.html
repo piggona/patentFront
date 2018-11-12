@@ -1,9 +1,8 @@
-<!--搜索条件框-->
 <div class="card card-default">
         <!--头信息：改为选择块-->
         <div class="card-header">
             <ul class="nav nav-pills col-md-9">
-                <h3 class="card-title">专利分析</h3>
+                <h3 class="card-title">被引数量分析</h3>
             </ul>
             <!--/*框选项*/-->
             <div class="card-tools col-md-3">
@@ -19,10 +18,33 @@
                     <!--搜索项选择器-->
                     <section class="content">
                         <div class="container-fluid">
-                            <div id="trendGraph" style="width: 700px;height:400px;"></div>
-                            
-                            <div id="pieGraph" style="width: 700px;height:400px;"></div>
-                            <div id="cloudGraph" style="width: 700px;height:400px;"></div>
+                            <div class="relationship-graph col-md-8">
+                                <div id="trend-graph" style="width: 600px;height:400px;"></div>
+                            </div>
+                            <div class="most-cited-patents col-md-4">
+                                    <div class="sub-title">MOST RECENT CITING PATENTS</div>
+                                    <hr>
+                                    <div class="cited-patents">
+                                        1. <a href=# id="cited-title">Method and apparatus for providing point-to-point</a>
+                                        <div id="cited-num">May29,2018</div>
+                                    </div>
+                                    <div class="cited-patents">
+                                        2. <a href=# id="cited-title">Method and apparatus for providing point-to-point</a>
+                                        <div id="cited-num">May29,2018</div>
+                                    </div>
+                                    <div class="cited-patents">
+                                        3. <a href=# id="cited-title">Method and apparatus for providing point-to-point</a>
+                                        <div id="cited-num">May29,2018</div>
+                                    </div>
+                                    <div class="cited-patents">
+                                        4. <a href=# id="cited-title">Method and apparatus for providing point-to-point</a>
+                                        <div id="cited-num">May29,2018</div>
+                                    </div>
+                                    <div class="cited-patents">
+                                        5. <a href=# id="cited-title">Method and apparatus for providing point-to-point</a>
+                                        <div id="cited-num">1May29,2018</div>
+                                    </div>
+                            </div>
                         </div>
                         <!-- /.row -->
                     </section>
@@ -31,5 +53,4 @@
             </div>
             <!-- /.tab-content -->
         </div>
-    </div>
-    <!--搜索框结束-->
+</div>
