@@ -107,21 +107,23 @@ var chartInfo = {
     },
     getInfo : function(){
         var _this = this;
+        var submit_data = _patent.getUrlParam('patent_uuid');
         _patent.request({
             //发data到服务器地址
-            url : 'http://10.210.17.107:8000/api/patent/',
+            url : 'http://192.168.1.123:8000/api/patent/histogram/citation/'+submit_data,
             method : 'get',
             success: function(res){
-                _this.display_data = res;
+                res = res['data'];
                 console.log(res);
                 if(res){
                     // 接收页面信息
                     for (let i=0;i<res.length;i++)
                     {
-                        _this.xdata.push(res[i].year);
-                        _this.data.push(res[i].cited);
+                        _this.xdata.push(res[i].time);
+                        _this.data.push(res[i].patent_cnt);
                     }
                     _this.setOption();
+                    myChart.setOption(chartInfo.option);
                 }
                 
             },
@@ -132,7 +134,5 @@ var chartInfo = {
     }
 }
 chartInfo.chartInit();
-// 绘制图表
-myChart.setOption(chartInfo.option);
 
 

@@ -25,7 +25,7 @@ var _display = {
         var _this = this;
         _patent.request({
             //发data到服务器地址
-            url : 'http://10.210.17.107:8000/api/patent/detail/'+submit_data,
+            url : 'http://192.168.1.123:8000/api/patent/detail/'+submit_data,
             method : 'get',
             success: function(res){
                 _this.display_data = res;

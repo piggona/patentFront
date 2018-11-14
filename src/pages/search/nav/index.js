@@ -42,17 +42,7 @@ var header = {
         else{
             _patent.request({
                 //发data到服务器地址
-                url : 'http://wanlinke.com',
-                data : submit_data,
-                success: function(res){
-                    if(res.keyword){
-                        $('#search-input').val(keyword);
-                    }
-                    console.log(res);
-                },
-                error: function(err){
-                    console.log(err);
-                }
+                
             });
         }
     }

@@ -2,6 +2,7 @@
 
 require('./index.css');
 var echarts = require('echarts/lib/echarts');
+var _patent = require('utils/patent.js');
 // 引入柱状图
 require('echarts');
 require('./index.css');
@@ -13,113 +14,156 @@ var myChart = echarts.init(document.getElementById('trend-graph'));
 var cloudChart = echarts.init(document.getElementById('cloud-graph'));
 var coGraph = echarts.init(document.getElementById('co-graph'));
 // 绘制图表
-myChart.setOption({
-    color: ['#3398DB'],
-    tooltip : {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow',
-            label: {
-                show: true
-            }
-        }
-    },
-    toolbox: {
-        show : true,
-        feature : {
-            mark : {show: true},
-            dataView : {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar']},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
-    },
-    calculable : true,
-    legend: {
-        data:['专利被引数量'],
-        itemGap: 5
-    },
-    grid: {
-        top: '12%',
-        left: '8%',
-        right: '10%',
-        containLabel: true
-    },
-    xAxis: [
-        {
-            type : 'category',
-            data : ['2000','2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
-        }
-    ],
-    yAxis: [
-        {
-            type : 'value',
-            name : '专利被引数量',
-            axisLabel: {
-                formatter: function (a) {
-                    a = +a;
-                    return isFinite(a)
-                        ? echarts.format.addCommas(+a)
-                        : '';
+var chartInfo = {
+    xdata : [],
+    data : [],
+    option : {
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    show: true
                 }
             }
-        }
-    ],
-    dataZoom: [
-        {
-            show: true,
-            start: 0,
-            end: 100
         },
-        {
-            type: 'inside',
-            start: 94,
-            end: 100
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
         },
-        {
-            show: true,
-            yAxisIndex: 0,
-            filterMode: 'empty',
-            width: 30,
-            height: '80%',
-            showDataShadow: false,
-            left: '93%'
-        }
-    ],
-    series : [
-        {
-            name: '专利被引数量',
-            type: 'bar',
-            data: ['0','1','2','3','15','12']
-        }
-    ]
-});
+        calculable : true,
+        legend: {
+            data:['专利被引数量'],
+            itemGap: 5
+        },
+        grid: {
+            top: '12%',
+            left: '8%',
+            right: '10%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type : 'category',
+                data : ['2000','2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'],
+            }
+        ],
+        yAxis: [
+            {
+                type : 'value',
+                name : '专利被引数量',
+                axisLabel: {
+                    formatter: function (a) {
+                        a = +a;
+                        return isFinite(a)
+                            ? echarts.format.addCommas(+a)
+                            : '';
+                    }
+                }
+            }
+        ],
+        dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+            {
+                type: 'inside',
+                start: 94,
+                end: 100
+            },
+            {
+                show: true,
+                yAxisIndex: 0,
+                filterMode: 'empty',
+                width: 30,
+                height: '80%',
+                showDataShadow: false,
+                left: '93%'
+            }
+        ],
+        series : [
+            {
+                name: '专利被引数量',
+                type: 'bar',
+                data: ['0','1','2','3','60','12']
+            }
+        ]
+    },
+    chartInit : function(){
+        this.getInfo();
+        
+    },
+    setOption : function(){
+        var _this = this;
+        _this.option.series[0].data = _this.data;
+        _this.option.xAxis[0].data = _this.xdata;
+    },
+    getInfo : function(){
+        var _this = this;
+        var submit_data = _patent.getUrlParam('patent_uuid');
+        _patent.request({
+            //发data到服务器地址
+            url : 'http://192.168.1.123:8000/api/patent/histogram/citation/'+submit_data,
+            method : 'get',
+            success: function(res){
+                res = res['data'];
+                console.log(res);
+                if(res){
+                    // 接收页面信息
+                    for (let i=0;i<res.length;i++)
+                    {
+                        _this.xdata.push(res[i].time);
+                        _this.data.push(res[i].patent_cnt);
+                    }
+                    _this.setOption();
+                    myChart.setOption(chartInfo.option);
+                }
+                
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+}
+chartInfo.chartInit();
 
-cloudChart.setOption({
+var cloudInfo = {
+    data: [],
+    option: {
         tooltip: {},
         series: [{
             type : 'wordCloud',  //类型为字符云
-                shape:'smooth',  //平滑
-                gridSize : 2, //网格尺寸
-                size : ['80%','80%'],
+            shape:'smooth',  //平滑
+            gridSize : 2, //网格尺寸
+            size : ['80%','80%'],
                 //sizeRange : [ 50, 100 ],  
-                rotationRange : [ 46, 80 ], //旋转范围
-                textStyle : {  
-                    normal : {
-                        fontFamily:'sans-serif',
-                        color : function() {  
-                            return 'rgb(' + [
-                                Math.round(Math.random() * 255),
-                                Math.round(Math.random() * 255),
-                                Math.round(Math.random() * 255)
-                            ].join(',') + ')';
-                        }  
-                    },  
-                    emphasis : {  
-                        shadowBlur : 5,  //阴影距离
-                        shadowColor : '#333'  //阴影颜色
-                    }  
-                },
+            rotationRange : [ 46, 80 ], //旋转范围
+            textStyle : {  
+                normal : {
+                fontFamily:'sans-serif',
+                color : function() {  
+                    return 'rgb(' + [
+                        Math.round(Math.random() * 255),
+                        Math.round(Math.random() * 255),
+                        Math.round(Math.random() * 255)
+                        ].join(',') + ')';
+                }  
+                },  
+                emphasis : {  
+                    shadowBlur : 5,  //阴影距离
+                    shadowColor : '#333'  //阴影颜色
+                }  
+            },
                 data:[{
                     name: '汽车',
                     value: 10000,
@@ -185,7 +229,41 @@ cloudChart.setOption({
                     value: 265
                 }]
         }]
+    },
+    chartInit : function(){
+        this.getInfo();
+        
+    },
+    setOption : function(){
+        var _this = this;
+        _this.option.series[0].data = _this.data;
+    },
+    getInfo : function(){
+        var _this = this;
+        var submit_data = _patent.getUrlParam('patent_uuid');
+        _patent.request({
+            //发data到服务器地址
+            url : 'http://192.168.1.123:8000/api/patent/histogram/citation/'+submit_data,
+            method : 'get',
+            success: function(res){
+                res = res['data'];
+                console.log(res);
+                if(res){
+                    // 接收页面信息
+                    _this.data = res;
+                    _this.setOption();
+                    myChart.setOption(cloudInfo.option);
+                }
+                
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
     }
+}
+
+cloudChart.setOption(
 );
 
 var coGraphChart = {
