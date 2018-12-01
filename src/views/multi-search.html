@@ -26,7 +26,6 @@
             var former = $('#side_chosen');
             var standard_search = $('#standard_search');
             var second_search = $('#second_search');
-            console.log(selected);
             former.attr("id","not_chosen")
             selected.attr("id","side_chosen");
             if (data === '.button1')
@@ -47,10 +46,13 @@
         this.resultclick=function(data){
             var selected = $(data);
             var former = $('.nav-link-result.active');
-            selected.attr("class","nav-link-result active");
-            former.attr("class","nav-link-result");
-            console.log(selected);
-            console.log(former);
+            if(selected.attr("id") === former.attr("id"))
+            {
+
+            }else{
+                selected.attr("class","nav-link-result active");
+                former.attr("class","nav-link-result");
+            }
         }
         this.searchclick=function(data){
             var selected = $(data);

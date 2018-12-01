@@ -25,11 +25,10 @@ var _display = {
         var _this = this;
         _patent.request({
             //发data到服务器地址
-            url : 'http://192.168.1.123:8000/api/patent/detail/'+submit_data,
+            url : 'api/patent/detail/'+submit_data,
             method : 'get',
             success: function(res){
                 _this.display_data = res;
-                console.log(res);
                 if(res){
                     // 接收页面信息
                     var inventor = res.inventors;
@@ -40,11 +39,15 @@ var _display = {
                     var assignees_name = _this.get_assignees(assignees);
                     var classification = res.classification;
                     var classification_name = _this.get_classification(classification);
+                    var date = _this.get_date(res);
                     res['inventor_name'] = inventor_name;
                     res['assignees_name'] = assignees_name;
                     res['classification_name'] = classification_name;
+                    res["date"] = date;
 
                     $('#display-container').html("");
+                    console.log("get_res");
+                    console.log(res);
                     $('#display-container').append(_patent.renderHtml(_result,res));
                     $('.login-panel').append(_patent.renderHtml(_fullText,res));
 
@@ -70,12 +73,27 @@ var _display = {
             }
         }); 
     },
+    get_date : function(res){
+        var date = {"documentDate": "","applicationDate": "","publishedDate": ""};
+        date["documentDate"] = res["documentDate"]["raw"].substr(0,4)+'/'+res.documentDate.raw.substr(4,2)+'/'+res.documentDate.raw.substr(6,2);
+        console.log("documentDate");
+        console.log(date["documentDate"]);
+        date["applicationDate"] = res.applicationDate.raw.substr(0,4)+'/'+res.applicationDate.raw.substr(4,2)+'/'+res.applicationDate.raw.substr(6,2);
+        console.log("applicationDate");
+        console.log(date["applicationDate"]);
+        console.log("publishedDate");
+        console.log(res.publishedDate.raw);
+        date["publishedDate"] = res.publishedDate.raw.substr(0,4)+'/'+res.publishedDate.raw.substr(4,2)+'/'+res.publishedDate.raw.substr(6,2);
+        
+        return date;
+    },
     get_name : function(inventor){
         var inventor_name = [];
         for (let i=0;i<inventor.length; i++){
             if (JSON.stringify(inventor[i]) != "{}"){
-                let name = {"name" : ""};
+                let name = {"name" : "","uuid":""};
                 name["name"]=inventor[i].name.raw;
+                name["uuid"]=inventor[i].uuid;
                 inventor_name.push(name);
             }
             else{
@@ -84,8 +102,8 @@ var _display = {
         return inventor_name;
     },
     get_assignees : function(assignees){
-        var assignees_name = '';
-        assignees_name = assignees[0].name.raw
+        var assignees_name = [];
+        assignees_name.push(assignees);
         return assignees_name;
     },
     get_classification : function(classification){
@@ -93,11 +111,11 @@ var _display = {
         var ipc = classification.ipc;
         var uspc = classification.uspc;
         var cpc = classification.cpc;
-        console.log("ipc");
+        console.log("ipc：");
         console.log(ipc);
-        console.log("uspc");
+        console.log("uspc：");
         console.log(uspc);
-        console.log("cpc");
+        console.log("cpc：");
         console.log(cpc);
         for(let i=0;i<ipc.length;i++){
             if (JSON.stringify(ipc[i]) != "{}"){

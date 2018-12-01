@@ -8,11 +8,15 @@ var _patent = {
     *后端请求
     */
     request : function(param){
+        let urlinfo = "";
+        $.getJSON("./urlinfo.json",function(data){
+            urlinfo = data.url;
+        })
         $.ajax({
-            type     : param.method || 'post',
-            url      : param.url    || '',
-            dataType : param.type   || 'json',
-            data     : param.data   || '',
+            type     : param.method                        || 'post',
+            url      : urlinfo+param.url || '',
+            dataType : param.type                          || 'json',
+            data     : param.data                          || '',
             crossDomain : true,
             success  : function(res){
                 // ajax请求的回调函数

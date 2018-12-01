@@ -8,6 +8,7 @@ var echarts = require('echarts/lib/echarts');
 require('echarts');
 require('./index.css');
 var _patent = require('utils/patent.js')
+var _cited = require('html-loader!./cited.html')
 
 
 // 基于准备好的dom，初始化echarts实例
@@ -103,16 +104,18 @@ var chartInfo = {
     setOption : function(){
         var _this = this;
         _this.option.series[0].data = _this.data;
-        _this.option.xAxis[0].data = _this.xdata;
+        _this.option.xAxis[0].data = _this.xdata
+        
     },
     getInfo : function(){
         var _this = this;
         var submit_data = _patent.getUrlParam('patent_uuid');
         _patent.request({
             //发data到服务器地址
-            url : 'http://192.168.1.123:8000/api/patent/histogram/citation/'+submit_data,
+            url : 'api/patent/histogram/citation/'+submit_data,
             method : 'get',
             success: function(res){
+                cited = res;
                 res = res['data'];
                 console.log(res);
                 if(res){
@@ -124,6 +127,8 @@ var chartInfo = {
                     }
                     _this.setOption();
                     myChart.setOption(chartInfo.option);
+                    $("#detail-cited").html("");
+                    $("#detail-cited").append(_patent.renderHtml(_cited,cited))
                 }
                 
             },

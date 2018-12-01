@@ -10,6 +10,11 @@ require('bootstrap/js/src/collapse.js');
 var _select2 = require('pages/search/select2/generate.js');
 var _patent = require('utils/patent.js');
 var _searchResult = require('pages/search/search-result/index.js');
+var _patentTitle = require('html-loader!./tr/patent.html');
+var _paperTitle = require('html-loader!./tr/paper.html');
+var _foundTitle = require('html-loader!./tr/found.html');
+var _corpTitle = require('html-loader!./tr/corp.html');
+var _personTitle = require('html-loader!./tr/person.html');
 
 var header_multi = {
     search_phrase : {"type": "prime","sort": "relativity", "from": 0, "size": 10, "query": [{"attr": "_all","query": "","logic": ""},{"attr": "patentType","query": "","logic": ""},{"attr": "inventors.name.raw","query": "","logic": ""},{"attr": "assignees.name.raw","query": "","logic": ""},{"attr": "classification.uspc.raw","query": "","logic": ""},{"attr": "country","query": "","logic": ""},{"attr": "documentDate.iso","query": "","logic": ""}]},
@@ -19,6 +24,24 @@ var header_multi = {
     pageinit : function(){
         var basic_query = {"type": "basic","query": ""};
         var keyword = _patent.getUrlParam("keyword");
+        var searchtype = _patent.getUrlParam("type");
+        if(searchtype === "searchpatent")
+        {
+            $('#search-result-tr').html("");
+            $('#search-result-tr').append(_patentTitle);
+        }else if(searchtype === "search_paper"){
+            $('#search-result-tr').html("");
+            $('#search-result-tr').append(_paperTitle);
+        }else if(searchtype === "searchfound"){
+            $('#search-result-tr').html("");
+            $('#search-result-tr').append(_foundTitle);
+        }else if(searchtype === "searchcorp"){
+            $('#search-result-tr').html("");
+            $('#search-result-tr').append(_corpTitle);
+        }else{
+            $('#search-result-tr').html("");
+            $('#search-result-tr').append(_personTitle);
+        }
         basic_query["query"] = keyword;
         this.searchSubmit(basic_query);
     },
@@ -194,7 +217,7 @@ var header_multi = {
         else{
             _patent.request({
                 //发data到服务器地址
-                url : 'http://192.168.1.123:8000/api/patent/search/',
+                url : 'api/patent/search/',
                 method : 'post',
                 data : JSON.stringify(search_phrase),
                 success: function(res){

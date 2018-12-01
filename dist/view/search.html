@@ -13,7 +13,7 @@
 <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
     <title>专利系统index页面</title>
-<link href="/dist/css/common.css?53163425bf5f2e4d13c8" rel="stylesheet"><link href="/dist/css/search.css?53163425bf5f2e4d13c8" rel="stylesheet"></head>
+<link href="/dist/css/common.css?4f7316e5b54ba1494ce8" rel="stylesheet"><link href="/dist/css/search.css?4f7316e5b54ba1494ce8" rel="stylesheet"></head>
 
 <body>
 <!--顶栏用户登出页面-->
@@ -43,11 +43,11 @@
     <!--头信息：改为选择块-->
     <div class="card-header">
             <ul class="nav nav-pills col-md-9">
-                <li class="nav-item"><button class="nav-link-search" id="searchpatent" data-toggle="tab" onclick="Click.searchclick('#searchpatent')">专利查询</button></li>
-                <li class="nav-item"><button class="nav-link-search active" id="searchpaper" data-toggle="tab" onclick="Click.searchclick('#searchpaper')">论文查询</button></li>
-                <li class="nav-item"><button class="nav-link-search" id="searchfound" data-toggle="tab" onclick="Click.searchclick('#searchfound')">基金查询</button></li>
+                <li class="nav-item"><button class="nav-link-search  active" id="searchpatent" data-toggle="tab" onclick="Click.searchclick('#searchpatent')">专利查询</button></li>
                 <li class="nav-item"><button class="nav-link-search" id="searchcorp" data-toggle="tab" onclick="Click.searchclick('#searchcorp')">机构查询</button></li>
                 <li class="nav-item"><button class="nav-link-search" id="searchperson" data-toggle="tab" onclick="Click.searchclick('#searchperson')">人员查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchpaper" data-toggle="tab" onclick="Click.searchclick('#searchpaper')">论文查询</button></li>
+                <li class="nav-item"><button class="nav-link-search" id="searchfound" data-toggle="tab" onclick="Click.searchclick('#searchfound')">基金查询</button></li>
             </ul>
         <!--/*框选项*/-->
         <!--框选项结束-->
@@ -96,15 +96,15 @@
     <div class="w">
         <div class="links">
             <a class="link" href="http://www.baidu.com" target="_blank">
-                访问万林克主页
+                访问万林克公司主页
             </a>
         </div>
         <p class="copyright">
-            Copyright © 2018 北京万林克技术有限公司 All Right Reserved
+            Copyright © 2018 北京万林克网络技术股份有限公司 All Right Reserved
         </p>
     </div>
 </div>
-<script type="text/javascript" src="/dist/js/common.js?53163425bf5f2e4d13c8"></script><script type="text/javascript" src="/dist/js/search.js?53163425bf5f2e4d13c8"></script></body>
+<script type="text/javascript" src="/dist/js/common.js?4f7316e5b54ba1494ce8"></script><script type="text/javascript" src="/dist/js/search.js?4f7316e5b54ba1494ce8"></script></body>
 <script>
     (function(){
         this.click=function(data){
@@ -141,8 +141,12 @@
         this.searchclick=function(data){
             var selected = $(data);
             var former = $('.nav-link-search.active');
-            selected.attr("class","nav-link-search active");
-            former.attr("class","nav-link-search");
+            if(selected.attr("id") === former.attr("id")){
+            }
+            else{
+                selected.attr("class","nav-link-search active");
+                former.attr("class","nav-link-search");
+            }
         }
         this.showResult=function(){
             console.log($('#select2-item').val());

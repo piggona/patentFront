@@ -32,7 +32,7 @@ var header = {
     },
     //搜索所有的输入,使用id查找，并提交。
     searchSubmit : function(){
-        window.location.href = './multi-search.html?keyword=' + $('#simple-search').val();
+        window.location.href = './multi-search.html?keyword=' + $('#simple-search').val()+'&type='+$('.nav-link-search.active').attr("id");
     }
 };
 

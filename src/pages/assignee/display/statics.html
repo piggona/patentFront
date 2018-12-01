@@ -1,0 +1,30 @@
+<div class="top-assignees col-md-4">
+        <div class="sub-title">TOP INVENTORS</div>
+        <hr>
+        {{#inventors}}
+        <div class="cited-patents">
+            {{rank}}. <a href="person.html?person={{person_name}}" id="cited-title">{{title}}</a>
+            <div id="cited-num">{{patent_num}} Patents</div>
+        </div>
+        {{/inventors}}
+</div>
+<div class="top-assignees col-md-4">
+        <div class="sub-title">MOST MENTIONED NBER CLASSES</div>
+        <hr>
+        {{#nberClass}}
+        <div class="cited-patents">
+            {{rank}}. <a href=# id="cited-title">{{nber}}</a>
+            <div id="cited-num">{{patent_num}} Patents</div>
+        </div>
+        {{/nberClass}}
+</div>
+<div class="top-assignees col-md-4">
+        <div class="sub-title">MOST MENTIONED CPC CLASSES</div>
+        <hr>
+        {{#cpcClass}}
+        <div class="cited-patents">
+            {{rank}}. <a href=# id="cited-title">{{cpc}}</a>
+            <div id="cited-num">{{patent_num}} Patents</div>
+        </div>
+        {{/cpcClass}}
+</div>

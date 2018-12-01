@@ -6,7 +6,7 @@
                      
                 </span>
                 <br>
-                <span class="description" style="width: 50%; float:right;">Shared publicly - {{ documentDate.raw }}</span>
+                <span class="description" style="width: 50%; float:right;">Shared publicly - {{ date.documentDate }}</span>
             </div>
             
 
@@ -28,7 +28,7 @@
                         <br><br>
 
                         <p class="text-muted">
-                            {{applicationDate.raw}}
+                            {{date.applicationDate}}
                         </p>
 
                         <hr>
@@ -43,7 +43,7 @@
                         <strong><i class="fa fa-calendar mr-1"></i> 公开（公告）日期</strong>
                         <br><br>
 
-                        <p class="text-muted">{{publishedDate.raw}}</p>
+                        <p class="text-muted">{{date.publishedDate}}</p>
 
                         <hr>
 
@@ -76,7 +76,7 @@
                             <strong><i class="fa fa-user mr-1"></i> 申请（专利权）人</strong>
                             <br><br>
                             <p class="text-muted">
-                                <span class="tag tag-success"><a id="display-name" href="assignee.html?assignee={{assignees_name}}">{{ assignees_name }}</a></span>
+                                {{#assignees}}<span class="tag tag-success"><a id="display-name" href="assignee.html?assignee={{uuid}}">{{name.raw}}</a></span>{{/assignees}}
                             </p>
                         
                         
@@ -87,7 +87,7 @@
 
                             <p class="text-muted">
                             {{#inventor_name}}
-                                <a id="display-name" href="person.html?inventor={{name}}">{{name}}</a><br>
+                                <a id="display-name" href="person.html?inventor={{uuid}}">{{name}}</a><br>
                             {{/inventor_name}}
                             </p>
                     </div>

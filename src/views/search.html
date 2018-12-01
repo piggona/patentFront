@@ -52,8 +52,12 @@
         this.searchclick=function(data){
             var selected = $(data);
             var former = $('.nav-link-search.active');
-            selected.attr("class","nav-link-search active");
-            former.attr("class","nav-link-search");
+            if(selected.attr("id") === former.attr("id")){
+            }
+            else{
+                selected.attr("class","nav-link-search active");
+                former.attr("class","nav-link-search");
+            }
         }
         this.showResult=function(){
             console.log($('#select2-item').val());

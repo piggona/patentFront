@@ -1,0 +1,30 @@
+<div class="top-assignees col-md-4">
+        <div class="sub-title">MOST CITED PATENTS</div>
+        <hr>
+        {{#cited}}
+        <div class="cited-patents">
+            {{rank}}. <a href="assignee.html?assignee={{assignee_name}}" id="cited-title">{{title}}</a>
+            <div id="cited-num">{{patent_num}} Patents</div>
+        </div>
+        {{/cited}}
+</div>
+<div class="top-assignees col-md-4">
+        <div class="sub-title">MOST MENTIONED NBER CLASSES</div>
+        <hr>
+        {{#nberClass}}
+        <div class="cited-patents">
+            {{rank}}. <a href="detail.html?assignee={{assignee_name}}" id="cited-title">{{nber}}</a>
+            <div id="cited-num">{{patent_num}} Patents</div>
+        </div>
+        {{/nberClass}}
+</div>
+<div class="top-assignees col-md-4">
+        <div class="sub-title">MOST MENTIONED CPC CLASSES</div>
+        <hr>
+        {{#cpcClass}}
+        <div class="cited-patents">
+            {{rank}}. <a href="detail.html?assignee={{assignee_name}}" id="cited-title">{{cpc}}</a>
+            <div id="cited-num">{{patent_num}} Patents</div>
+        </div>
+        {{/cpcClass}}
+</div>

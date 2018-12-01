@@ -3,6 +3,8 @@
 require('./index.css');
 var echarts = require('echarts/lib/echarts');
 var _patent = require('utils/patent.js');
+var _cited = require('html-loader!./cited.html');
+var _recent = require('html-loader!./recent.html');
 // 引入柱状图
 require('echarts');
 require('./index.css');
@@ -104,28 +106,31 @@ var chartInfo = {
     },
     setOption : function(){
         var _this = this;
-        _this.option.series[0].data = _this.data;
-        _this.option.xAxis[0].data = _this.xdata;
+        _this.option["xAxis"][0]["data"] = _this.xdata;
+        _this.option["series"][0]["data"] = _this.data;
     },
     getInfo : function(){
         var _this = this;
-        var submit_data = _patent.getUrlParam('patent_uuid');
+        var submit_data = _patent.getUrlParam('inventor');
         _patent.request({
             //发data到服务器地址
-            url : 'http://192.168.1.123:8000/api/patent/histogram/citation/'+submit_data,
+            url : 'api/person/histogram/'+submit_data,
             method : 'get',
             success: function(res){
-                res = res['data'];
+                let recent = res;
+                let chartres = res['data'];
                 console.log(res);
                 if(res){
                     // 接收页面信息
-                    for (let i=0;i<res.length;i++)
+                    for (let i=0;i<chartres.length;i++)
                     {
-                        _this.xdata.push(res[i].time);
-                        _this.data.push(res[i].patent_cnt);
+                        _this.xdata.push(chartres[i].time);
+                        _this.data.push(chartres[i].patent_cnt);
                     }
                     _this.setOption();
                     myChart.setOption(chartInfo.option);
+                    $("#inventor-recent").html("");
+                    $("#inventor-recent").append(_patent.renderHtml(_recent,recent));
                 }
                 
             },
@@ -240,19 +245,22 @@ var cloudInfo = {
     },
     getInfo : function(){
         var _this = this;
-        var submit_data = _patent.getUrlParam('patent_uuid');
+        let submit_data = _patent.getUrlParam('inventor');
         _patent.request({
             //发data到服务器地址
-            url : 'http://192.168.1.123:8000/api/patent/histogram/citation/'+submit_data,
+            url : 'api/person/cloudChart/keywords/'+submit_data,
             method : 'get',
             success: function(res){
-                res = res['data'];
-                console.log(res);
+                let cited = res;
+                let cloudres = res["data"];
+                console.log(cloudres);
                 if(res){
                     // 接收页面信息
-                    _this.data = res;
+                    _this.data = cloudres;
                     _this.setOption();
-                    myChart.setOption(cloudInfo.option);
+                    cloudChart.setOption(_this.option);
+                    $('#inventor-cited').html("");
+                    $('#inventor-cited').append(_patent.renderHtml(_cited,cited));
                 }
                 
             },
@@ -262,14 +270,12 @@ var cloudInfo = {
         });
     }
 }
+cloudInfo.getInfo();
 
-cloudChart.setOption(
-);
-
-var coGraphChart = {
-    years : ['1996','2001','2006','2011','2016','2018'],
-    inventors : ['Seung June yi','Sung Jun Park','Sung Duck Chun'],
-    data : [[0,2,2],[0,2,1],[0,2,10],[0,2,23],[0,2,19],[0,3,43],[0,3,72],[0,3,80],[0,4,123],[0,5,31],[1,3,95],[1,5,33],[2,3,9],[2,4,107],[2,5,75]],
+var coInfo = {
+    years : [],
+    inventors : [],
+    data : [],
 
     option : {
         tooltip: {
@@ -280,7 +286,7 @@ var coGraphChart = {
         series: []
     },
     init : function(){
-        var _this = this;
+        let _this = this;
         echarts.util.each(_this.inventors, function (day, idx) {
             console.log(idx);
             _this.option.title.push({
@@ -296,7 +302,7 @@ var coGraphChart = {
                 top: (idx * 100 / 7 + 5) + '%',
                 height: (100 / 7 - 10) + '%',
                 axisLabel: {
-                    interval: 0
+                    interval: 2
                 }
             });
             _this.option.series.push({
@@ -305,15 +311,53 @@ var coGraphChart = {
                 type: 'scatter',
                 data: [],
                 symbolSize: function (dataItem) {
-                    return dataItem[1] * 4;
+                    return 30;
                 }
             });
         });
         
         echarts.util.each(_this.data, function (dataItem) {
-            _this.option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]/6]);
+            _this.option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
+        });
+    },
+    chartInit : function(){
+        this.getInfo();
+    },
+    setOption : function(){
+        this.init();
+    },
+    getInfo : function(){
+        let _this = this;
+        let submit_data = _patent.getUrlParam('inventor');
+        _patent.request({
+            //发data到服务器地址
+            url : 'api/person/coopChart/'+submit_data,
+            method : 'get',
+            success: function(res){
+                if(res){
+                    // 接收页面信息
+                    for (let i=res["year_min"];i<=res["year_max"];i++)
+                    {
+                        _this.years.push(i);
+                    };
+                    for (let i=0;i<res["name"].length;i++)
+                    {
+                        _this.inventors.push(res.name[i]);
+                    };
+                    _this.data = res.data;
+                    console.log(_this.years);
+                    console.log(_this.inventors);
+                    console.log(_this.data);
+                    console.log(_this.option.series);
+                    _this.setOption();
+                    coGraph.setOption(_this.option);
+                }
+                
+            },
+            error: function(err){
+                console.log(err);
+            }
         });
     }
 }
-coGraphChart.init();
-coGraph.setOption(coGraphChart.option);
+coInfo.getInfo();

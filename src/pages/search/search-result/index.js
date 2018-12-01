@@ -8,7 +8,7 @@ var _patent = require('utils/patent.js');
 var _result = require('html-loader!./result.html');
 
 var _searchResult = {
-    displayPack : [{patent_uuid:'uspto_USD0746618S1',documentId:'publicId',title:'title',assignees:'patentee',publishedDate:'publicDate',uspc:'IPC'},{patent_uuid:'uspto_USD0746618S1',documentId:'publicId',title:'title',assignees:'patentee',publishedDate:'publicDate',uspc:'IPC'}],
+    displayPack : [],
     resultTemplate : _result,
     // publicId   : '',
     // title      : '',
@@ -26,6 +26,9 @@ var _searchResult = {
         var _displayPack = this.displayPack;
         console.log(_displayPack);
         $('#search-result').html("");
+        if (this.displayPack.length === 0){
+            $('#search-result').append(_patent)
+        }
         for(let i=0,l=_displayPack.length;i<l;i++){
             $('#search-result').append(_patent.renderHtml(_result,_displayPack[i]));
         }
