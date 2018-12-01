@@ -24,7 +24,9 @@ var config = {
         'search'       : ['./src/pages/search/index.js'],
         'multi-search' : ['./src/pages/search/index.js'],
         'person'       : ['./src/pages/person/index.js'],
-        'assignee'     : ['./src/pages/assignee/index.js']
+        'assignee'     : ['./src/pages/assignee/index.js'],
+        'paper'        : ['./src/pages/paper/index.js'],
+        'found'        : ['./src/pages/found/index.js']
     },
     output: {
         path      : path.resolve(__dirname,'./dist'),
@@ -79,7 +81,9 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('search')),
         new HtmlWebpackPlugin(getHtmlConfig('multi-search')),
         new HtmlWebpackPlugin(getHtmlConfig('person')),
-        new HtmlWebpackPlugin(getHtmlConfig('assignee'))
+        new HtmlWebpackPlugin(getHtmlConfig('assignee')),
+        new HtmlWebpackPlugin(getHtmlConfig('paper')),
+        new HtmlWebpackPlugin(getHtmlConfig('found'))
     ],
     resolve: {
         alias : {

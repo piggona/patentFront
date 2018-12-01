@@ -29,7 +29,7 @@ input[type='checkbox']{
 
 /* 定宽布局 */
 .w{
-    width: 1080px;
+    width: 70%;
     margin: 0 auto;
     position: relative;
 /*用途：将超出边界的东西不显示，并消除浮动即排列重叠的元素*/
@@ -106,4 +106,12 @@ input[type='checkbox']{
     display: flex;
     flex-wrap: wrap;
     padding: 0%;
+}
+
+.search-side {
+    display: inline-block;
+    vertical-align: top;
+}
+input.form-control {
+    width: 50%;
 }

@@ -15,9 +15,12 @@ var _paperTitle = require('html-loader!./tr/paper.html');
 var _foundTitle = require('html-loader!./tr/found.html');
 var _corpTitle = require('html-loader!./tr/corp.html');
 var _personTitle = require('html-loader!./tr/person.html');
+var _foundSide = require('html-loader!./side/foundside.html');
+var _paperSide = require('html-loader!./side/paperside.html');
+var _static = require("html-loader!./static.html");
 
 var header_multi = {
-    search_phrase : {"type": "prime","sort": "relativity", "from": 0, "size": 10, "query": [{"attr": "_all","query": "","logic": ""},{"attr": "patentType","query": "","logic": ""},{"attr": "inventors.name.raw","query": "","logic": ""},{"attr": "assignees.name.raw","query": "","logic": ""},{"attr": "classification.uspc.raw","query": "","logic": ""},{"attr": "country","query": "","logic": ""},{"attr": "documentDate.iso","query": "","logic": ""}]},
+    search_phrase : {"type": "prime","sort": "relativity", "from": 0, "size": 10, "query": [{"attr": "_all","query": "","logic": ""},{"attr": "patentType","query": "","logic": ""},{"attr": "inventors.name.raw","query": "","logic": ""},{"attr": "assignees.name.raw","query": "","logic": ""},{"attr": "classification.uspc.raw","query": "","logic": ""},{"attr": "country","query": "","logic": ""},{"attr": "documentDate.iso","query": "","logic": ""},{"attr":"title","query":"","logic":""},{"attr":"digest","query":"","logic":""}]},
     init : function(){
         this.bindEvent();
     },
@@ -29,12 +32,16 @@ var header_multi = {
         {
             $('#search-result-tr').html("");
             $('#search-result-tr').append(_patentTitle);
-        }else if(searchtype === "search_paper"){
+        }else if(searchtype === "searchpaper"){
             $('#search-result-tr').html("");
             $('#search-result-tr').append(_paperTitle);
+            $('.search-side').html("");
+            $('.search-side').append(_paperSide);
         }else if(searchtype === "searchfound"){
             $('#search-result-tr').html("");
             $('#search-result-tr').append(_foundTitle);
+            $('.search-side').html("");
+            $('.search-side').append(_foundSide);
         }else if(searchtype === "searchcorp"){
             $('#search-result-tr').html("");
             $('#search-result-tr').append(_corpTitle);
@@ -62,41 +69,6 @@ var header_multi = {
         });
         $('#reset-button').click(function(){
             _this.resetAll();
-        })
-        $('#patent-btn').click(function(){
-            _this.getPatentSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
-        });
-        $('#inventor-btn').click(function(){
-            _this.getInventorSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
-        });
-        $('#assignee-btn').click(function(){
-            _this.getAssigneeSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
-        });
-        $('#class-btn').click(function(){
-            _this.getClassSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
-        });
-        $('#nation-btn').click(function(){
-            _this.getLocationSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
-        });
-        $('#gov-btn').click(function(){
-            _this.getGovSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
-        });
-        $('#date-btn').click(function(){
-            _this.getDateSubmit();
-            _this.search_phrase["from"]=0;
-            _this.searchSubmit(_this.search_phrase);
         });
         $('#next-page').click(function(){
             _this.nextPage();
@@ -107,6 +79,20 @@ var header_multi = {
             _this.search_phrase["from"]=0;
             _this.searchSubmit(_this.search_phrase);
         })
+        $('.card-tools .btn-tool').click(function(){
+            let btn = $(this).children("i").attr("class");
+            if(btn === "fa fa-minus"){
+                $(this).children("i").attr("class","fa fa-plus");
+            }else{
+                $(this).children("i").attr("class","fa fa-minus");
+            }
+        })
+        $(document).keyup(function(e){
+            var key = e.which;
+            if(key === 13){
+                console.log("13")
+            }
+        });
     },
     changeSort : function(){
         var _this = this;
@@ -119,81 +105,81 @@ var header_multi = {
         _this.search_phrase['from'] = previous+_this.search_phrase['size'];
         console.log(_this.search_phrase);
     },
-    getPatentSubmit : function(){
-        var _this = this;
-        var search_type = $('#multi-search-body-patent .form-group').find('input[type=checkbox]:checked').val();
-        var patent_type = $('#multi-search-body-patent .patent-type').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-patent .form-control').val());
-        var query = _this.search_phrase['query'];
-        query[0]['query'] =  $.trim(query[0]['query']+' '+patent_query);
-        query[0]['logic'] = search_type;
-        query[1]['query'] = patent_type;
+    // getPatentSubmit : function(){
+    //     var _this = this;
+    //     var search_type = $('#multi-search-body-patent .form-group').find('input[type=checkbox]:checked').val();
+    //     var patent_type = $('#multi-search-body-patent .patent-type').find('input[type=checkbox]:checked').val();
+    //     var patent_query = $.trim($('#multi-search-body-patent .form-control').val());
+    //     var query = _this.search_phrase['query'];
+    //     query[0]['query'] =  $.trim(query[0]['query']+' '+patent_query);
+    //     query[0]['logic'] = search_type;
+    //     query[1]['query'] = patent_type;
         
-        _this.search_phrase['query'] = query;
-        console.log(_this.search_phrase);
-    },
-    getInventorSubmit : function(){
-        var _this = this;
-        var search_type = $('#multi-search-body-inventor .form-group').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-inventor .form-control').val());
-        var query = _this.search_phrase['query'];
-        query[2]['query'] =  $.trim(query[2]['query']+' '+patent_query);
-        query[2]['logic'] = search_type;
+    //     _this.search_phrase['query'] = query;
+    //     console.log(_this.search_phrase);
+    // },
+    // getInventorSubmit : function(){
+    //     var _this = this;
+    //     var search_type = $('#multi-search-body-inventor .form-group').find('input[type=checkbox]:checked').val();
+    //     var patent_query = $.trim($('#multi-search-body-inventor .form-control').val());
+    //     var query = _this.search_phrase['query'];
+    //     query[2]['query'] =  $.trim(query[2]['query']+' '+patent_query);
+    //     query[2]['logic'] = search_type;
         
-        _this.search_phrase['query'] = query;
-        console.log(_this.search_phrase); 
-    },
-    getAssigneeSubmit : function(){
-        var _this = this;
-        var search_type = $('#multi-search-body-assignee .form-group').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-assignee .form-control').val());
-        var query = _this.search_phrase['query'];
-        query[3]['query'] =  $.trim(query[3]['query']+' '+patent_query);
-        query[3]['logic'] = search_type;
+    //     _this.search_phrase['query'] = query;
+    //     console.log(_this.search_phrase); 
+    // },
+    // getAssigneeSubmit : function(){
+    //     var _this = this;
+    //     var search_type = $('#multi-search-body-assignee .form-group').find('input[type=checkbox]:checked').val();
+    //     var patent_query = $.trim($('#multi-search-body-assignee .form-control').val());
+    //     var query = _this.search_phrase['query'];
+    //     query[3]['query'] =  $.trim(query[3]['query']+' '+patent_query);
+    //     query[3]['logic'] = search_type;
         
-        _this.search_phrase['query'] = query;
-        console.log(_this.search_phrase);
-    },
-    getClassSubmit : function(){
-        var _this = this;
-        var search_type = $('#multi-search-body-class .form-group').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-class .form-control').val());
-        var query = _this.search_phrase['query'];
-        query[4]['attr'] = "classification."+search_type+".raw";
-        query[4]['query'] =  patent_query;
-        // query[4]['query'] = search_type;
+    //     _this.search_phrase['query'] = query;
+    //     console.log(_this.search_phrase);
+    // },
+    // getClassSubmit : function(){
+    //     var _this = this;
+    //     var search_type = $('#multi-search-body-class .form-group').find('input[type=checkbox]:checked').val();
+    //     var patent_query = $.trim($('#multi-search-body-class .form-control').val());
+    //     var query = _this.search_phrase['query'];
+    //     query[4]['attr'] = "classification."+search_type+".raw";
+    //     query[4]['query'] =  patent_query;
+    //     // query[4]['query'] = search_type;
         
-        _this.search_phrase['query'] = query;
-        console.log(_this.search_phrase);
-    },
-    getLocationSubmit : function(){
-        var _this = this;
-        var search_type = $('#multi-search-body-location .form-group').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-location .form-control').val());
-        var query = _this.search_phrase['query'];
-        console.log(search_type);
-        if(search_type === 'both')
-        {
-            query[5]['query'] =  patent_query;
-        }
-        else{
-            query[5]['attr'] = search_type+".address.country";
-            query[5]['query'] = patent_query;
-        }
-        _this.search_phrase['query'] = query;
-        console.log(_this.search_phrase);
-    },
-    getDateSubmit : function(){
-        var _this = this;
-        var search_type = $('#multi-search-body-date .form-group').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-date .form-control').val());
-        var query = _this.search_phrase['query'];
-        query[6]['attr'] = search_type+'Date.iso';
-        query[6]['query'] =  patent_query;
+    //     _this.search_phrase['query'] = query;
+    //     console.log(_this.search_phrase);
+    // },
+    // getLocationSubmit : function(){
+    //     var _this = this;
+    //     var search_type = $('#multi-search-body-location .form-group').find('input[type=checkbox]:checked').val();
+    //     var patent_query = $.trim($('#multi-search-body-location .form-control').val());
+    //     var query = _this.search_phrase['query'];
+    //     console.log(search_type);
+    //     if(search_type === 'both')
+    //     {
+    //         query[5]['query'] =  patent_query;
+    //     }
+    //     else{
+    //         query[5]['attr'] = search_type+".address.country";
+    //         query[5]['query'] = patent_query;
+    //     }
+    //     _this.search_phrase['query'] = query;
+    //     console.log(_this.search_phrase);
+    // },
+    // getDateSubmit : function(){
+    //     var _this = this;
+    //     var search_type = $('#multi-search-body-date .form-group').find('input[type=checkbox]:checked').val();
+    //     var patent_query = $.trim($('#multi-search-body-date .form-control').val());
+    //     var query = _this.search_phrase['query'];
+    //     query[6]['attr'] = search_type+'Date.iso';
+    //     query[6]['query'] =  patent_query;
         
-        _this.search_phrase['query'] = query;
-        console.log(_this.search_phrase);
-    },
+    //     _this.search_phrase['query'] = query;
+    //     console.log(_this.search_phrase);
+    // },
     // getGovSubmit : function(){
     //     var _this = this;
     //     var search_type = $('#multi-search-body-gov .form-group').find('input[type=checkbox]:checked').val();
@@ -226,30 +212,38 @@ var header_multi = {
                         _searchResult.result(res.data);
                         _searchResult.display();
                     }
+                    else{
+                        $('#search-result').html("");
+                        $('#search-result').append(_static);
+                    }
                 },
                 error: function(err){
                     console.log(err);
+                    $('#search-result').html("");
+                    $('#search-result').append(_static);
                 }
             });
         }
         console.log(_searchResult.displayPack);
     },
     resetAll : function(){
-        _searchResult.result('{}');
+        _searchResult.result([]);
         _searchResult.display();
-        this.search_phrase = {"type": "prime","sort": "relativity", "from": 0, "size": 10, "query": [{"attr": "_all","query": "","logic": ""},{"attr": "patentType","query": "","logic": ""},{"attr": "inventors.name.raw","query": "","logic": ""},{"attr": "assignees.name.raw","query": "","logic": ""},{"attr": "classification.uspc.raw","query": "","logic": ""},{"attr": "country","query": "","logic": ""},{"attr": "documentDate.iso","query": "","logic": ""}]};
+        this.search_phrase = {"type": "prime","sort": "relativity", "from": 0, "size": 10, "query": [{"attr": "_all","query": "","logic": ""},{"attr": "patentType","query": "","logic": ""},{"attr": "inventors.name.raw","query": "","logic": ""},{"attr": "assignees.name.raw","query": "","logic": ""},{"attr": "classification.uspc.raw","query": "","logic": ""},{"attr": "country","query": "","logic": ""},{"attr": "documentDate.iso","query": "","logic": ""},{"attr":"title","query":"","logic":""},{"attr":"digest","query":"","logic":""}]};
     },
     getAllSubmit : function(){
         var _this = this;
-        var search_type = $('#multi-search-body-patent .form-group').find('input[type=checkbox]:checked').val();
-        var patent_type = $('#multi-search-body-patent .patent-type').find('input[type=checkbox]:checked').val();
-        var patent_query = $.trim($('#multi-search-body-patent .form-control').val());
+        var patent_type = ""
+        patent_type = $('#multi-search-body-patent .patent-type').find('input[type=checkbox]:checked').each(function(){
+            let value = $(this).val()
+            console.log(value)
+            patent_type = patent_type+' '+value.toString()
+            console.log(patent_type)
+        });
         var query = _this.search_phrase['query'];
-        query[0]['query'] =  $.trim(patent_query);
-        query[0]['logic'] = search_type;
         query[1]['query'] = patent_type;
-        search_type = $('#multi-search-body-inventor .form-group').find('input[type=checkbox]:checked').val();
-        patent_query = $.trim($('#multi-search-body-inventor .form-control').val());
+        let search_type = $('#multi-search-body-inventor .form-group').find('input[type=checkbox]:checked').val();
+        let patent_query = $.trim($('#multi-search-body-inventor .form-control').val());
         query[2]['query'] =  $.trim(patent_query);
         query[2]['logic'] = search_type;
         search_type = $('#multi-search-body-assignee .form-group').find('input[type=checkbox]:checked').val();
@@ -258,50 +252,34 @@ var header_multi = {
         query[3]['logic'] = search_type;
         search_type = $('#multi-search-body-class .form-group').find('input[type=checkbox]:checked').val();
         patent_query = $.trim($('#multi-search-body-class .form-control').val());
-        query[5]['query'] =  patent_query;
-        query[4]['query'] = search_type;
+        query[4]['attr'] = "classification."+search_type+".raw";
+        query[4]['query'] =  patent_query;
         search_type = $('#multi-search-body-location .form-group').find('input[type=checkbox]:checked').val();
         patent_query = $.trim($('#multi-search-body-location .form-control').val());
-        query[6]['query'] =  patent_query;
-        query[7]['query'] = search_type;
+        if(search_type === 'both')
+        {
+            query[5]['query'] =  patent_query;
+        }
+        else{
+            query[5]['attr'] = search_type+".address.country";
+            query[5]['query'] = patent_query;
+        }
         search_type = $('#multi-search-body-date .form-group').find('input[type=checkbox]:checked').val();
         patent_query = $.trim($('#multi-search-body-date .form-control').val());
+        query[6]['attr'] = search_type+'Date.iso';
+        query[6]['query'] =  patent_query;
+        search_type = $('#multi-search-body-titlesearch .form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-titlesearch .form-control').val());
+        query[7]['logic'] = search_type;
+        query[7]['query'] =  patent_query;
+        search_type = $('#multi-search-body-digest.form-group').find('input[type=checkbox]:checked').val();
+        patent_query = $.trim($('#multi-search-body-digest .form-control').val());
+        query[8]['logic'] = search_type;
         query[8]['query'] =  patent_query;
-        query[9]['query'] = search_type;
-        search_type = $('#multi-search-body-gov .form-group').find('input[type=checkbox]:checked').val();
-        patent_query = $.trim($('#multi-search-body-gov .form-control').val());
-        query = _this.search_phrase['query'];
-        query[10]['query'] =  patent_query;
-        query[11]['query'] = search_type;
 
         _this.search_phrase['query'] = query;
         console.log(_this.search_phrase);
     }
 };
-$('#select2-item').change(function(){
-    var selected_item = $('#select2-item').val();
-    console.log(selected_item);
-    $('.form-group-id').attr('class','form-group-id hide');
-    $('.form-group-name').attr('class','form-group-name hide');
-    $('.form-group-patentee').attr('class','form-group-patentee hide');
-    $('.form-group-nation').attr('class','form-group-nation hide');
-    $('.form-group-type').attr('class','form-group-type hide');
-    if(!(selected_item === null)){
-        for(let i=0,len=selected_item.length; i<len; i++) {
-            let element = selected_item[i];
-            if(element === '0'){
-                $('.form-group-id').attr('class','form-group-id');
-            }else if(element === '1'){
-                $('.form-group-name').attr('class','form-group-name');
-            }else if(element === "2"){
-                $('.form-group-nation').attr('class','form-group-nation');
-            }else if(element === "3"){
-                $('.form-group-type').attr('class','form-group-type');
-            }else if(element === "4"){
-                $('.form-group-patentee').attr('class','form-group-patentee');
-            }
-        };
-    }   
-});
 header_multi.init();
 header_multi.pageinit();

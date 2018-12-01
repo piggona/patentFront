@@ -66,9 +66,20 @@
         window.Click=this;
     })();
     (function(){
-        $('.form-group').find('input[type=checkbox]').bind('click', function(){
-        $('.form-group').find('input[type=checkbox]').not(this).attr("checked", false);
-    });
+        // $('.form-group').find('input[type=checkbox]').bind('click', function(){
+        // $('.form-group').find('input[type=checkbox]').not(this).attr("checked", false);});
+        $('#patent-form-group').find('input[type=radio]').bind('click', function(){
+        $('#patent-form-group').find('input[type=radio]').not(this).attr("checked", false);});
+        $('#inventor-form-group').find('input[type=radio]').bind('click', function(){
+        $('#inventor-form-group').find('input[type=radio]').not(this).attr("checked", false);});
+        $('#titlesearch-form-group').find('input[type=radio]').bind('click', function(){
+        $('#titlesearch-form-group').find('input[type=radio]').not(this).attr("checked", false);});
+        $('#digest-form-group').find('input[type=radio]').bind('click', function(){
+        $('#digest-form-group').find('input[type=radio]').not(this).attr("checked", false);});
+        $('#assginee-form-group').find('input[type=radio]').bind('click', function(){
+        $('#assignee-form-group').find('input[type=radio]').not(this).attr("checked", false);});
+        $('#nber-form-group').find('input[type=radio]').bind('click', function(){
+        $('#nber-form-group').find('input[type=radio]').not(this).attr("checked", false);});
     })();
 </script>
 </html>

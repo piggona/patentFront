@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--公共的header信息-->
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="keywords" content="专利系统">
+<meta name="description" content="专利系统主页">
+<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--搜索页面的header-->
+<script src="//cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <title>专利系统详情页面</title>
+<link href="/dist/css/common.css?30ca69b18ae047f93529" rel="stylesheet"><link href="/dist/css/found.css?30ca69b18ae047f93529" rel="stylesheet"></head>
+<body>
+<section class="detail">
+        <!--顶栏用户登出页面-->
+<div class="nav">
+    <div class="w">
+        <div class="user-info">
+            <span class="user login">
+                <span class="link-text js-login">欢迎，
+                    <span class="username"></span>
+                </span>
+                <span class="link">退出</span>
+            </span>
+        </div>
+    </div>
+</div>
+        <!--网页顶栏-->
+<div class="nav-simple">
+    <div class="w">
+        <a class="logo">科技文献检索分析<div class="logo-sec">Vanlink</div></a>
+        
+    </div>
+</div>
+        <div class="w">
+            <div class="content with-nav">
+                <!--搜索条件框-->
+<div class="card card-default" id="patent-display">
+    <!--头信息：改为选择块-->
+    <div class="card-header">
+        <ul class="nav nav-pills col-md-9">
+
+        </ul>
+        <!--/*框选项*/-->
+        <div class="card-tools col-md-3">
+            <button type="button" class="btn btn-tool" data-toggle="collapse" href="#patent-body-display" data-parent="#patent-display"><i
+                    class="fa fa-remove"></i></button>
+            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+        <!--框选项结束-->
+    </div>
+    <!--头信息结束-->
+    <div class="card-body" id="patent-body-display">
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <!--搜索项选择器-->
+                <section class="content">
+                    <div class="container-fluid" id="display-container">
+                        <div class="post">
+                            <div class="user-block">
+                                <div class="detail-title" style="width: 70%;">
+                                    <span class="username" style="width: 50%">
+                                        <a class="patent-name" href="#">{{ title }}</a>
+
+                                    </span>
+                                    <br>
+                                    <span class="description" style="width: 50%; float:right;">Shared publicly - {{
+                                        date.documentDate }}</span>
+                                </div>
+
+
+                                <div class="card-body">
+                                    <div class="detail-text">
+                                        <p>
+                                            {{ abstract.plain }}
+                                        </p>
+                                        <a href="javascript:void(0)" id="full-text">详情...</a>
+                                    </div>
+                                    <div class="apply display-bottom" style="float :right">
+                                        <strong><i class="fa fa-anchor mr-1"></i> 董事会</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">
+                                            {{applicationId}}
+                                        </p>
+                                        <strong><i class="fa fa-calendar mr-1"></i> 分公司</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">
+                                            {{date.applicationDate}}
+                                        </p>
+
+                                        <hr>
+                                    </div>
+
+                                    <div class="public display-bottom" style="float: right">
+                                        <strong><i class="fa fa-map-marker mr-1"></i> 组织代号</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">{{documentId}}</p>
+
+                                        <strong><i class="fa fa-calendar mr-1"></i> 基金金额</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">{{date.publishedDate}}</p>
+
+                                        <hr>
+
+                                    </div>
+                                    <div style="clear: both"></div>
+                                    <br><br><br><br>
+
+
+                                    <div class="bottom">
+                                        <div class="display-bottom" style="float: left; width: 300px">
+                                            <strong><i class="fa fa-file-text-o mr-1"></i> 赞助人：</strong>
+                                            <br><br>
+                                            <p class="text-muted">ipc：</p>
+                                            <p class="text-muted">
+                                                {{#classification_name.ipc}}
+                                                {{content}};<br>
+                                                {{/classification_name.ipc}}</p>
+                                            <p class="text-muted">uspc：</p>
+                                            <p class="text-muted">
+                                                {{#classification_name.uspc}}
+                                                {{content}};
+                                                {{/classification_name.uspc}}</p>
+                                            <p class="text-muted">cpc：</p>
+                                            <p class="text-muted">
+                                                {{#classification_name.cpc}}
+                                                {{content}};<br>
+                                                {{/classification_name.cpc}}</p>
+                                        </div>
+                                        <div class="display-bottom" style="float: left;">
+                                            <strong><i class="fa fa-user mr-1"></i> 投资人</strong>
+                                            <br><br>
+                                            <p class="text-muted">
+                                                <span class="tag tag-success"><a id="display-name" href="assignee.html?assignee={{assignees_name}}">{{
+                                                        assignees_name }}</a></span>
+                                            </p>
+                                        </div>
+
+
+
+                                        <hr>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                            </div>
+                            <!-- /.user-block -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </section>
+                <!--搜索器选择项结束-->
+            </div>
+        </div>
+        <!-- /.tab-content -->
+    </div>
+</div>
+<!--搜索框结束-->
+            </div>
+        </div>
+        <!--网页footer-->
+<div class="footer">
+    <div class="w">
+        <div class="links">
+            <a class="link" href="http://www.baidu.com" target="_blank">
+                访问万林克公司主页
+            </a>
+        </div>
+        <p class="copyright">
+            Copyright © 2018 北京万林克网络技术股份有限公司 All Right Reserved
+        </p>
+    </div>
+</div>
+</section>
+<section class="elastic-layer close">
+        <div class="login-panel">
+        
+        </div>
+</section>
+<script type="text/javascript" src="/dist/js/common.js?30ca69b18ae047f93529"></script><script type="text/javascript" src="/dist/js/found.js?30ca69b18ae047f93529"></script></body>
+</html>

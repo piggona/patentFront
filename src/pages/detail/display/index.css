@@ -4,7 +4,7 @@
 }
 .detail-text {
     float: left;
-    width: 600px;
+    width: 700px;
 }
 .detail-title {
     margin-bottom: 3rem;
@@ -50,4 +50,9 @@
 .blur{
     filter:blur(2px);
     -webkit-filter:blur(2px);
+}
+
+#detail-full {
+    height: 38rem;
+    overflow: auto;
 }

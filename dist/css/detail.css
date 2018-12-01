@@ -58,7 +58,6 @@ a:hover{
 .patent-name{
     font-size: 4rem;
     color: #495057;
-    padding: 2rem;
 }
 
 .nav-link {
@@ -128,7 +127,7 @@ a:hover{
 }
 .detail-text {
     float: left;
-    width: 600px;
+    width: 700px;
 }
 .detail-title {
     margin-bottom: 3rem;
@@ -174,6 +173,11 @@ a:hover{
 .blur{
     filter:blur(2px);
     -webkit-filter:blur(2px);
+}
+
+#detail-full {
+    height: 38rem;
+    overflow: auto;
 }
 .direct-chat-message {
     -webkit-transform: translate(0,0);

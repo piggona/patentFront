@@ -882,7 +882,16 @@ thead {
     font-size: 1.5rem;
     text-align: center;
 }
-select.multi-search {
+#assignee-badge {
+    width: 100%;
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+}
+#assignee-td {
+    width: 2rem;
+}select.multi-search {
     /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
     border: solid 1px #8d8c8c;
     height: 30px;

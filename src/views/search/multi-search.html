@@ -1,70 +1,42 @@
 <div class="top-button">
-  <button class="btn top-btn" id="reset-button"><i class="fa fa-retweet"></i>Reset</button>
-  <button class="btn top-btn" id="multi-search-button"><i class="fa fa-search"></i>Search</button>
+    <button class="btn top-btn" id="reset-button"><i class="fa fa-retweet"></i>Reset</button>
+    <button class="btn top-btn" id="multi-search-button"><i class="fa fa-search"></i>Search</button>
 </div>
 <div class="card card-side" id="multi-search-patent">
-    <div class="card-header" style="width: 260px">
-      <h5 class="card-title">专利搜索</h5>
+    <div class="card-header">
+        <h5 class="card-title">专利类型</h5>
 
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-patent" data-parent="#multi-search-patent">
-          <i class="fa fa-minus"></i>
-        </button>
-      </div>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" id="search-fa" data-toggle="collapse" data-target="#multi-search-body-patent"
+                data-parent="#multi-search-patent">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0" id="multi-search-body-patent">
-      <ul class="products-list product-list-in-card pl-2 pr-2">
-        <div class="form-group">
-            <label>
-                <input type="checkbox" class="minimal" value="precise">
-            </label>
-            <label>
-                精确搜索
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" class="minimal" value="and">
-            </label>
-            <label>
-                输出满足全部选项的内容
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" class="minimal" value="or">
-            </label>
-            <label>
-                输出满足其中任意一个选项的内容
-            </label>
-        </div>
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control">
-            <span class="input-group-append">
-                <button type="button" class="btn btn-info btn-flat" id="patent-btn"><i class="fa fa-search"></i></button>
-            </span>
-        </div>
-        <h5>专利类型</h5>
-        <div class="patent-type">
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="patent-type">
                 <label>
-                    <input type="checkbox" class="minimal" value="UTILITY">
+                    <input type="checkbox" class="minimal" value="UTILITY" checked=true>
                 </label>
                 <label>
-                    普通专利
+                    发明专利
                 </label>
                 <label>
-                    <input type="checkbox" class="minimal" value="DESIGN">
+                    <input type="checkbox" class="minimal" value="DESIGN" checked=true>
                 </label>
                 <label>
                     设计类专利
                 </label>
                 <label>
-                    <input type="checkbox" class="minimal" value="PLANT">
+                    <input type="checkbox" class="minimal" value="PLANT" checked=true>
                 </label>
                 <label>
                     Plant专利
                 </label>
-        </div>
-      </ul>
+            </div>
+        </ul>
     </div>
     <!-- /.card-body -->
     <!-- <div class="card-footer text-center">
@@ -72,49 +44,119 @@
     </div> -->
     <!-- /.card-footer -->
 </div>
-<br>
+<div class="card card-side" id="multi-search-titlesearch">
+    <div class="card-header" style="width: 260px">
+        <h5 class="card-title">标题搜索</h5>
+
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-titlesearch"
+                data-parent="#multi-search-titlesearch">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0 collapse" id="multi-search-body-titlesearch">
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="form-group" id="titlesearch-form-group">
+                <label>
+                    <input type="radio" class="minimal" value="and" checked="true">
+                </label>
+                <label>
+                    匹配所有词
+                </label>
+                <br>
+                <label>
+                    <input type="radio" class="minimal" value="or">
+                </label>
+                <label>
+                    匹配至少一个词
+                </label>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+            </div>
+        </ul>
+    </div>
+    <!-- /.card-body -->
+    <!-- <div class="card-footer text-center">
+      <a href="javascript:void(0)" class="uppercase">View All Products</a>
+    </div> -->
+    <!-- /.card-footer -->
+</div>
+<div class="card card-side" id="multi-search-digest">
+    <div class="card-header" style="width: 260px">
+        <h5 class="card-title">摘要搜索</h5>
+
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-digest"
+                data-parent="#multi-search-digest">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0 collapse" id="multi-search-body-digest">
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="form-group" id="digest-form-group">
+                <label>
+                    <input type="radio" class="minimal" value="and" checked="true">
+                </label>
+                <label>
+                    匹配所有词
+                </label>
+                <br>
+                <label>
+                    <input type="radio" class="minimal" value="or">
+                </label>
+                <label>
+                    匹配至少一个词
+                </label>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+            </div>
+        </ul>
+    </div>
+    <!-- /.card-body -->
+    <!-- <div class="card-footer text-center">
+      <a href="javascript:void(0)" class="uppercase">View All Products</a>
+    </div> -->
+    <!-- /.card-footer -->
+</div>
 <div class="card card-side" id="multi-search-inventor">
     <div class="card-header" style="width: 260px">
-      <h5 class="card-title">发明人搜索</h5>
+        <h5 class="card-title">发明人搜索</h5>
 
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-inventor" data-parent="#multi-search-inventor">
-          <i class="fa fa-minus"></i>
-        </button>
-      </div>
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-inventor"
+                data-parent="#multi-search-inventor">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0 collapse" id="multi-search-body-inventor">
-      <ul class="products-list product-list-in-card pl-2 pr-2">
-        <div class="form-group">
-            <label>
-                <input type="checkbox" class="minimal" value="precise">
-            </label>
-            <label>
-                精确搜索
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" class="minimal" value="and">
-            </label>
-            <label>
-                输出满足全部选项的内容
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" class="minimal" value="or">
-            </label>
-            <label>
-                输出满足其中任意一个选项的内容
-            </label>
-        </div>
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control">
-            <span class="input-group-append">
-                <button type="button" class="btn btn-info btn-flat" id="inventor-btn"><i class="fa fa-search"></i></button>
-            </span>
-        </div>
-      </ul>
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="form-group" id="inventor-form-group">
+                <label>
+                    <input type="radio" class="minimal" value="and" checked="true">
+                </label>
+                <label>
+                    匹配所有词
+                </label>
+                <br>
+                <label>
+                    <input type="radio" class="minimal" value="or">
+                </label>
+                <label>
+                    匹配至少一个词
+                </label>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+            </div>
+        </ul>
     </div>
     <!-- /.card-body -->
     <!-- <div class="card-footer text-center">
@@ -122,49 +164,39 @@
     </div> -->
     <!-- /.card-footer -->
 </div>
-<br>
 <div class="card card-side" id="multi-search-assignee">
     <div class="card-header" style="width: 260px">
-      <h5 class="card-title">专利权人搜索</h5>
+        <h5 class="card-title">专利权人搜索</h5>
 
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-assignee" data-parent="#multi-search-body-assignee">
-          <i class="fa fa-minus"></i>
-        </button>
-      </div>
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-assignee"
+                data-parent="#multi-search-body-assignee">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
     </div>
     <!-- /.card-header -->
     <div class="card-body p-0 collapse" id="multi-search-body-assignee">
-      <ul class="products-list product-list-in-card pl-2 pr-2">
-        <div class="form-group">
-            <label>
-                <input type="checkbox" class="minimal" value="precise">
-            </label>
-            <label>
-                精确搜索
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" class="minimal" value="and">
-            </label>
-            <label>
-                输出满足全部选项的内容
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" class="minimal" value="or">
-            </label>
-            <label>
-                输出满足其中任意一个选项的内容
-            </label>
-        </div>
-        <div class="input-group input-group-sm">
-            <input type="text" class="form-control">
-            <span class="input-group-append">
-                <button type="button" class="btn btn-info btn-flat" id="assignee-btn"><i class="fa fa-search"></i></button>
-            </span>
-        </div>
-      </ul>
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="form-group" id="assignee-form-group">
+                <label>
+                    <input type="radio" class="minimal" value="and" checked="true">
+                </label>
+                <label>
+                    匹配所有词
+                </label>
+                <br>
+                <label>
+                    <input type="radio" class="minimal" value="or">
+                </label>
+                <label>
+                    匹配至少一个词
+                </label>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+            </div>
+        </ul>
     </div>
     <!-- /.card-body -->
     <!-- <div class="card-footer text-center">
@@ -172,189 +204,119 @@
     </div> -->
     <!-- /.card-footer -->
 </div>
-<br>
 <div class="card card-side" id="multi-search-class">
-  <div class="card-header" style="width: 260px">
-    <h5 class="card-title">专利分类号搜索</h5>
+    <div class="card-header" style="width: 260px">
+        <h5 class="card-title">专利分类号搜索</h5>
 
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-class" data-parent="#multi-search-class">
-        <i class="fa fa-minus"></i>
-      </button>
-    </div>
-  </div>
-  <!-- /.card-header -->
-  <div class="card-body p-0 collapse" id="multi-search-body-class">
-    <ul class="products-list product-list-in-card pl-2 pr-2">
-      <div class="form-group">
-          <label>
-              <input type="checkbox" class="minimal" value="cpc">
-          </label>
-          <label>
-              CPC
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="nber">
-          </label>
-          <label>
-              NBER
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="uspc">
-          </label>
-          <label>
-              USPC
-          </label>
-      </div>
-      <div class="input-group input-group-sm">
-          <input type="text" class="form-control">
-          <span class="input-group-append">
-              <button type="button" class="btn btn-info btn-flat" id="class-btn"><i class="fa fa-search"></i></button>
-          </span>
-      </div>
-    </ul>
-  </div>
-  <!-- /.card-body -->
-  <!-- <div class="card-footer text-center">
-    <a href="javascript:void(0)" class="uppercase">View All Products</a>
-  </div> -->
-  <!-- /.card-footer -->
-</div>
-<br>
-<div class="card card-side" id="multi-search-location">
-  <div class="card-header" style="width: 260px">
-    <h5 class="card-title">国家搜索</h5>
-
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-location" data-parent="#multi-search-location">
-        <i class="fa fa-minus"></i>
-      </button>
-    </div>
-  </div>
-  <!-- /.card-header -->
-  <div class="card-body p-0 collapse" id="multi-search-body-location">
-    <ul class="products-list product-list-in-card pl-2 pr-2">
-      <div class="form-group">
-          <label>
-              <input type="checkbox" class="minimal" value="inventors">
-          </label>
-          <label>
-              发明人地址
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="assignees">
-          </label>
-          <label>
-              专利权人地址
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="both">
-          </label>
-          <label>
-              专利注册地
-          </label>
-      </div>
-      <div class="input-group input-group-sm">
-            <input type="text" class="form-control">
-            <span class="input-group-append">
-                <button type="button" class="btn btn-info btn-flat" id="nation-btn"><i class="fa fa-search"></i></button>
-            </span>
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-class"
+                data-parent="#multi-search-class">
+                <i class="fa fa-plus"></i>
+            </button>
         </div>
-    </ul>
-  </div>
-  <!-- /.card-body -->
-  <!-- <div class="card-footer text-center">
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0 collapse" id="multi-search-body-class">
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="form-group" id="nber-form-group">
+                <label>
+                    <input type="radio" class="minimal" value="cpc" checked="true">
+                </label>
+                <label>
+                    CPC
+                </label>
+                <label>
+                    <input type="radio" class="minimal" value="nber">
+                </label>
+                <label>
+                    NBER
+                </label>
+                <label>
+                    <input type="radio" class="minimal" value="uspc">
+                </label>
+                <label>
+                    USPC
+                </label>
+            </div>
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+            </div>
+        </ul>
+    </div>
+    <!-- /.card-body -->
+    <!-- <div class="card-footer text-center">
     <a href="javascript:void(0)" class="uppercase">View All Products</a>
   </div> -->
-  <!-- /.card-footer -->
+    <!-- /.card-footer -->
 </div>
-<br>
-<!-- <div class="card card-side" id="multi-search-gov">
-  <div class="card-header" style="width: 260px">
-    <h5 class="card-title">所属专利局(Government Interest)</h5>
+<div class="card card-side" id="multi-search-location">
+    <div class="card-header" style="width: 260px">
+        <h5 class="card-title">国家搜索</h5>
 
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-gov" data-parent="#multi-search-gov">
-        <i class="fa fa-minus"></i>
-      </button>
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-location"
+                data-parent="#multi-search-location">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
     </div>
-  </div> -->
-  <!-- /.card-header -->
-  <!-- <div class="card-body p-0 collapse" id="multi-search-body-gov">
-    <ul class="products-list product-list-in-card pl-2 pr-2">
-      <div class="form-group">
-          <label>
-              <input type="checkbox" class="minimal" value="both">
-          </label>
-          <label>
-              两者均可
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="name">
-          </label>
-          <label>
-              专利局名称
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="orgid">
-          </label>
-          <label>
-              Org.ID
-          </label>
-      </div>
-      <div class="input-group input-group-sm">
-          <input type="text" class="form-control">
-          <span class="input-group-append">
-              <button type="button" class="btn btn-info btn-flat" id="gov-btn"><i class="fa fa-search"></i></button>
-          </span>
-      </div>
-    </ul>
-  </div> -->
-  <!-- /.card-body -->
-  <!-- <div class="card-footer text-center">
-    <a href="javascript:void(0)" class="uppercase">View All Products</a>
-  </div> -->
-  <!-- /.card-footer -->
-<!-- </div>
-<br> -->
+    <!-- /.card-header -->
+    <div class="card-body p-0 collapse" id="multi-search-body-location">
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="form-group" id="nation-form-group">
+                <label>
+                    <input type="checkbox" class="minimal" value="inventors" checked="true">
+                </label>
+                <label>
+                    美国
+                </label>
+                <label>
+                    <input type="checkbox" class="minimal" value="assignees" checked="true">
+                </label>
+                <label>
+                    欧洲
+                </label>
+                <label>
+                    <input type="checkbox" class="minimal" value="both" checked="true">
+                </label>
+                <label>
+                    日本
+                </label>
+                <label>
+                    <input type="checkbox" class="minimal" value="both" checked="true">
+                </label>
+                <label>
+                    韩国
+                </label>
+            </div>
+        </ul>
+    </div>
+</div>
 <div class="card card-side" id="multi-search-date">
-  <div class="card-header" style="width: 260px">
-    <h5 class="card-title">基于日期搜索</h5>
+    <div class="card-header" style="width: 260px">
+        <h5 class="card-title">日期（1976-至今）</h5>
 
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-date" data-parent="#multi-search-date">
-        <i class="fa fa-minus"></i>
-      </button>
+        <div class="card-tools">
+            <button type="button" id="search-fa" class="btn btn-tool" data-toggle="collapse" data-target="#multi-search-body-date"
+                data-parent="#multi-search-date">
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
     </div>
-  </div>
-  <!-- /.card-header -->
-  <div class="card-body p-0" id="multi-search-body-date">
-    <ul class="products-list product-list-in-card pl-2 pr-2">
-      <div class="form-group">
-          <label>
-              <input type="checkbox" class="minimal" value="document">
-          </label>
-          <label>
-              入档日期
-          </label>
-          <label>
-              <input type="checkbox" class="minimal" value="published">
-          </label>
-          <label>
-              公开日期
-          </label>
-      </div>
-      <div class="input-group input-group-sm">
-          <input type="text" class="form-control">
-          <span class="input-group-append">
-              <button type="button" class="btn btn-info btn-flat" id="date-btn"><i class="fa fa-search"></i></button>
-          </span>
-      </div>
-    </ul>
-  </div>
-  <!-- /.card-body -->
-  <!-- <div class="card-footer text-center">
+    <!-- /.card-header -->
+    <div class="card-body p-0" id="multi-search-body-date">
+        <ul class="products-list product-list-in-card pl-2 pr-2">
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="yyyy, mm/yyyy"></input>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-info btn-flat" id="date-btn"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </ul>
+    </div>
+    <!-- /.card-body -->
+    <!-- <div class="card-footer text-center">
     <a href="javascript:void(0)" class="uppercase">View All Products</a>
   </div> -->
-  <!-- /.card-footer -->
+    <!-- /.card-footer -->
 </div>

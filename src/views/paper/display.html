@@ -1,0 +1,138 @@
+<!--搜索条件框-->
+<div class="card card-default" id="patent-display">
+    <!--头信息：改为选择块-->
+    <div class="card-header">
+        <ul class="nav nav-pills col-md-9">
+
+        </ul>
+        <!--/*框选项*/-->
+        <div class="card-tools col-md-3">
+            <button type="button" class="btn btn-tool" data-toggle="collapse" href="#patent-body-display" data-parent="#patent-display"><i
+                    class="fa fa-remove"></i></button>
+            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+        <!--框选项结束-->
+    </div>
+    <!--头信息结束-->
+    <div class="card-body" id="patent-body-display">
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <!--搜索项选择器-->
+                <section class="content">
+                    <div class="container-fluid" id="display-container">
+                        <div class="post">
+                            <div class="user-block">
+                                <div class="detail-title" style="width: 70%;">
+                                    <span class="username" style="width: 50%">
+                                        <a class="patent-name" href="#">{{ title }}</a>
+
+                                    </span>
+                                    <br>
+                                    <span class="description" style="width: 50%; float:right;">Shared publicly - {{
+                                        date.documentDate }}</span>
+                                </div>
+
+
+                                <div class="card-body">
+                                    <div class="detail-text">
+                                        <p>
+                                            {{ abstract.plain }}
+                                        </p>
+                                        <a href="javascript:void(0)" id="full-text">详情...</a>
+                                    </div>
+                                    <div class="apply display-bottom" style="float :right">
+                                        <strong><i class="fa fa-anchor mr-1"></i> 作者</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">
+                                            {{applicationId}}
+                                        </p>
+                                        <strong><i class="fa fa-calendar mr-1"></i> 所属机构</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">
+                                            {{date.applicationDate}}
+                                        </p>
+
+                                        <hr>
+                                    </div>
+
+                                    <div class="public display-bottom" style="float: right">
+                                        <strong><i class="fa fa-map-marker mr-1"></i> 第二作者</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">{{documentId}}</p>
+
+                                        <strong><i class="fa fa-calendar mr-1"></i> 所属机构</strong>
+                                        <br><br>
+
+                                        <p class="text-muted">{{date.publishedDate}}</p>
+
+                                        <hr>
+
+                                    </div>
+                                    <div style="clear: both"></div>
+                                    <br><br><br><br>
+
+
+                                    <div class="bottom">
+                                        <div class="display-bottom" style="float: left; width: 300px">
+                                            <strong><i class="fa fa-file-text-o mr-1"></i> 关键词：</strong>
+                                            <br><br>
+                                            <p class="text-muted">ipc：</p>
+                                            <p class="text-muted">
+                                                {{#classification_name.ipc}}
+                                                {{content}};<br>
+                                                {{/classification_name.ipc}}</p>
+                                            <p class="text-muted">uspc：</p>
+                                            <p class="text-muted">
+                                                {{#classification_name.uspc}}
+                                                {{content}};
+                                                {{/classification_name.uspc}}</p>
+                                            <p class="text-muted">cpc：</p>
+                                            <p class="text-muted">
+                                                {{#classification_name.cpc}}
+                                                {{content}};<br>
+                                                {{/classification_name.cpc}}</p>
+                                        </div>
+                                        <div class="display-bottom" style="float: left;">
+                                            <strong><i class="fa fa-user mr-1"></i> 研究领域</strong>
+                                            <br><br>
+                                            <p class="text-muted">
+                                                <span class="tag tag-success"><a id="display-name" href="assignee.html?assignee={{assignees_name}}">{{
+                                                        assignees_name }}</a></span>
+                                            </p>
+
+
+                                        </div>
+                                        <div class="display-bottom" style="float: left; width: 300px">
+                                            <strong><i class="fa fa-file-text-o mr-1"></i> 机构</strong>
+                                            <br><br>
+
+                                            <p class="text-muted">
+                                                {{#inventor_name}}
+                                                <a id="display-name" href="person.html?inventor={{uuid}}">{{name}}</a><br>
+                                                {{/inventor_name}}
+                                            </p>
+                                        </div>
+
+
+                                        <hr>
+                                    </div>
+                                    <div style="clear: both"></div>
+                                </div>
+                            </div>
+                            <!-- /.user-block -->
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </section>
+                <!--搜索器选择项结束-->
+            </div>
+        </div>
+        <!-- /.tab-content -->
+    </div>
+</div>
+<!--搜索框结束-->

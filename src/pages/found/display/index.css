@@ -1,0 +1,53 @@
+.display-bottom {
+    margin-right: 5rem;
+    border-top: 1px;
+}
+.detail-text {
+    float: left;
+    width: 600px;
+}
+.detail-title {
+    margin-bottom: 3rem;
+}
+.btn-info {
+    width: 120px;
+    float: right;
+}
+.text-muted {
+    color: #34495E;
+}
+#display-name {
+    color: #34495E;
+    text-decoration: black;
+}
+#display-name:hover {
+    color: #1A5276;
+}
+.patent-info {
+    background: #34495E;
+}
+.login-panel{
+    width:800px;
+    height:700px;
+    background-color:#EAECEE;
+    border-radius:10px;
+    margin:0 auto;
+    top:15%;
+    position:relative;
+}
+.elastic-layer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+.close{
+    display: none;
+}
+
+.blur{
+    filter:blur(2px);
+    -webkit-filter:blur(2px);
+}

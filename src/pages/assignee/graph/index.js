@@ -5,15 +5,19 @@ var echarts = require('echarts/lib/echarts');
 // 引入柱状图
 require('echarts');
 require('./index.css');
+require('echarts-wordcloud');
+
 var _patent = require('utils/patent.js');
 var _cited = require('html-loader!./cited.html');
 var _recent = require('html-loader!./recent.html');
+var _nber = require('html-loader!./nber.html');
 
 
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('trend-graph'));
 var netChart = echarts.init(document.getElementById('net-graph'));
-var coGraph = echarts.init(document.getElementById('co-graph'));
+var cloudChart = echarts.init(document.getElementById('cloud-graph'));
+var pieGraph = echarts.init(document.getElementById('pie-graph'));
 // 绘制图表
 var chartInfo = {
     xdata : [],
@@ -177,7 +181,8 @@ var netInfo = {
         },  
         series: [{  
             type: 'graph',  
-            layout: 'force',  
+            layout: 'force',
+            roam :true,  
             animation: false,  
             draggable: true,  
             data: "",  
@@ -254,7 +259,7 @@ var netInfo = {
                     _this.setOption();
                     console.log(_this.webkitDep);
                     console.log(_this.option);
-                    netChart.setOption(_this.option);
+                    netChart.setOption(netInfo.option);
                     $('#assignee-cited').html("");
                     $('#assignee-cited').append(_patent.renderHtml(_cited,cited));
                 }
@@ -268,85 +273,214 @@ var netInfo = {
 }
 netInfo.getInfo();
 
-var coInfo = {
-    years : [],
-    inventors : [],
-    data : [],
 
+var pieInfo = {
+    data : [{value:335, name:'G05D'},{value:310, name:'G05C'},{value:234, name:'G64C'},{value:135, name:'864C'},{value:1548, name:'864D'}],
     option : {
-        tooltip: {
-            position: 'top'
+        title : {
+            text: 'IPC分类饼图',
+            x:'center'
         },
-        title: [],
-        singleAxis: [],
-        series: []
-    },
-    init : function(){
-        let _this = this;
-        echarts.util.each(_this.inventors, function (day, idx) {
-            console.log(idx);
-            _this.option.title.push({
-                textBaseline: 'middle',
-                top: (idx + 0.5) * 100 / 7 + '%',
-                text: day
-            });
-            _this.option.singleAxis.push({
-                left: 180,
-                type: 'category',
-                boundaryGap: false,
-                data: _this.years,
-                top: (idx * 100 / 7 + 5) + '%',
-                height: (100 / 7 - 10) + '%',
-                axisLabel: {
-                    interval: 2
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['G05D','G05C','G64C','864C','864D']
+        },
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'G05D'},
+                    {value:310, name:'G05C'},
+                    {value:234, name:'G64C'},
+                    {value:135, name:'864C'},
+                    {value:1548, name:'864D'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
                 }
-            });
-            _this.option.series.push({
-                singleAxisIndex: idx,
-                coordinateSystem: 'singleAxis',
-                type: 'scatter',
-                data: [],
-                symbolSize: function (dataItem) {
-                    return 30;
-                }
-            });
-        });
-        
-        echarts.util.each(_this.data, function (dataItem) {
-            _this.option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
-        });
+            }
+        ]
     },
     chartInit : function(){
         this.getInfo();
+        
     },
     setOption : function(){
-        this.init();
+        this.option["legend"]["data"] = [];
+        for (let i=0,len=this.data;i<len;i++){
+            this.option["legend"]["data"].push(this.data[i]["name"]);
+        }
+        this.option["series"][0]["data"] = this.data;
     },
     getInfo : function(){
         let _this = this;
         let submit_data = _patent.getUrlParam('assignee');
         _patent.request({
             //发data到服务器地址
-            url : 'api/organization/coopChart/'+submit_data,
+            url : 'api/organization/pieChart/patentClass/'+submit_data,
             method : 'get',
             success: function(res){
                 if(res){
-                    // 接收页面信息
-                    for (let i=res["year_min"];i<=res["year_max"];i++)
-                    {
-                        _this.years.push(i);
-                    };
-                    for (let i=0;i<res["name"].length;i++)
-                    {
-                        _this.inventors.push(res.name[i]);
-                    };
-                    _this.data = res.data;
-                    console.log(_this.years);
-                    console.log(_this.inventors);
-                    console.log(_this.data);
-                    console.log(_this.option.series);
+                    console.log("res");
+                    console.log(res);
+                    _this.data = res["data"];
                     _this.setOption();
-                    coGraph.setOption(_this.option);
+                    let nber = res["nber"];
+                    console.log(_this.option);
+                    $('#assignee-nber').html("");
+                    $('#assignee-nber').append(_patent.renderHtml(_nber,nber));
+                }
+                pieGraph.setOption(pieInfo.option)
+                
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+
+}
+
+var cloudInfo = {
+    data: [],
+    option: {
+        tooltip: {},
+        series: [{
+            type : 'wordCloud',  //类型为字符云
+            shape:'smooth',  //平滑
+            gridSize : 2, //网格尺寸
+            textStyle: {
+                normal: {
+                    fontFamily: '微软雅黑',
+                    color: function(){
+                        var colors = ['#16A085', '#1F618D', '#B7950B', "#BA4A00", "#283747", '#A04000', '#B3B6B7', '#A04000', '#76448A'];
+                        return colors[parseInt(Math.random()*10)];
+                    }
+                }
+            },
+            size : ['80%','80%'],
+                //sizeRange : [ 50, 100 ],  
+            rotationRange : [ 46, 80 ], //旋转范围
+            // textStyle : {  
+            //     normal : {
+            //     fontFamily:'sans-serif',
+            //     color : function() {  
+            //         return 'rgb(' + [
+            //             Math.round(Math.random() * 255),
+            //             Math.round(Math.random() * 255),
+            //             Math.round(Math.random() * 255)
+            //             ].join(',') + ')';
+            //     }  
+            //     },  
+            //     emphasis : {  
+            //         shadowBlur : 5,  //阴影距离
+            //         shadowColor : '#333'  //阴影颜色
+            //     }  
+            // },
+                data:[{
+                    name: '汽车',
+                    value: 10000,
+                }, {
+                    name: '光学',
+                    value: 6181
+                }, {
+                    name: '相机',
+                    value: 4386
+                }, {
+                    name: '调色',
+                    value: 4055
+                }, {
+                    name: '电子',
+                    value: 2467
+                }, {
+                    name: '中华人民共和国',
+                    value: 2244
+                }, {
+                    name: '三星电子',
+                    value: 1898
+                }, {
+                    name: '苹果',
+                    value: 1484
+                }, {
+                    name: '诺基亚',
+                    value: 1112
+                }, {
+                    name: '北京邮电大学',
+                    value: 965
+                }, {
+                    name: 'Macbook Pro',
+                    value: 847
+                }, {
+                    name: 'Elasctic Search',
+                    value: 582
+                }, {
+                    name: '食品安全',
+                    value: 555
+                }, {
+                    name: '少儿教育',
+                    value: 550
+                }, {
+                    name: '诺贝尔奖',
+                    value: 462
+                }, {
+                    name: '区块链技术',
+                    value: 366
+                }, {
+                    name: '数字货币',
+                    value: 360
+                }, {
+                    name: '汽车制造',
+                    value: 282
+                }, {
+                    name: '智能驾驶',
+                    value: 273
+                }, {
+                    name: '飞行',
+                    value: 273
+                }, {
+                    name: '计算机技术',
+                    value: 265
+                }]
+        }]
+    },
+    chartInit : function(){
+        this.getInfo();
+        
+    },
+    setOption : function(){
+        var _this = this;
+        _this.option.series[0].data = _this.data;
+    },
+    getInfo : function(){
+        var _this = this;
+        let submit_data = _patent.getUrlParam('assignee');
+        _patent.request({
+            //发data到服务器地址
+            url : 'api/organization/cloudChart/keywords/'+submit_data,
+            method : 'get',
+            success: function(res){
+                let cited = res;
+                let cloudres = res["data"];
+                console.log(cloudres);
+                if(res){
+                    // 接收页面信息
+                    _this.data = cloudres;
+                    _this.setOption();
+                    cloudChart.setOption(_this.option);
+                    $('#inventor-cited').html("");
+                    $('#inventor-cited').append(_patent.renderHtml(_cited,cited));
                 }
                 
             },
@@ -356,4 +490,10 @@ var coInfo = {
         });
     }
 }
-coInfo.getInfo();
+cloudInfo.getInfo();
+pieInfo.chartInit();
+pieGraph.setOption(pieInfo.option);
+cloudChart.setOption(cloudInfo.option);
+netChart.setOption(netInfo.option);
+myChart.setOption(chartInfo.option);
+

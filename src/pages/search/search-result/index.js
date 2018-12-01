@@ -6,6 +6,7 @@
 require('./index.css');
 var _patent = require('utils/patent.js');
 var _result = require('html-loader!./result.html');
+var _static = require('html-loader!./static.html');
 
 var _searchResult = {
     displayPack : [],
@@ -19,6 +20,7 @@ var _searchResult = {
     result     : function(result){
         // 存储搜索结果,结果格式为json数组
         this.displayPack = result;
+        console.log(this.displayPack)
     },
 
     display    : function(){
@@ -26,8 +28,10 @@ var _searchResult = {
         var _displayPack = this.displayPack;
         console.log(_displayPack);
         $('#search-result').html("");
+        $('#comments-result').html("");
         if (this.displayPack.length === 0){
-            $('#search-result').append(_patent)
+            console.log(this.displayPack.length)
+            $('#comments-result').append(_static);
         }
         for(let i=0,l=_displayPack.length;i<l;i++){
             $('#search-result').append(_patent.renderHtml(_result,_displayPack[i]));

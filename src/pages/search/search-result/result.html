@@ -1,1 +1,9 @@
-<tr><td><a href="detail.html?patent_uuid={{ patent_uuid }}">{{ documentId }}</a></td><td>{{title}}</td><td>{{#assignees}}<a class="badge" href="assignee.html?assignee={{uuid}}">{{name}}</a>{{/assignees}}</td><td><div>{{publishedDate}}</div></td><td>{{uspc}}</td></tr>
+<tr>
+    <td><a href="detail.html?patent_uuid={{ patent_uuid }}">{{ documentId }}</a></td>
+    <td>{{title}}</td>
+    <td id="assignee-td">{{#assignees}}<a class="badge" id="assignee-badge" href="assignee.html?assignee={{uuid}}">{{name}}</a>{{/assignees}}</td>
+    <td>
+        <div>{{publishedDate}}</div>
+    </td>
+    <td>{{uspc}}</td>
+</tr>

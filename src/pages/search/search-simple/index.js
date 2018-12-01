@@ -22,6 +22,9 @@ var header = {
         $('#search-btn').click(function(){
             _this.searchSubmit();
         });
+        $('#just-multi').click(function(){
+            _this.getMulti();
+        })
         //输入提交后，做搜索提交
         $(document).keyup(function(e){
             var key = e.which;
@@ -33,6 +36,9 @@ var header = {
     //搜索所有的输入,使用id查找，并提交。
     searchSubmit : function(){
         window.location.href = './multi-search.html?keyword=' + $('#simple-search').val()+'&type='+$('.nav-link-search.active').attr("id");
+    },
+    getMulti : function(){
+        window.location.href = './multi-search.html?keyword=' + ''+'&type='+$('.nav-link-search.active').attr("id");
     }
 };
 

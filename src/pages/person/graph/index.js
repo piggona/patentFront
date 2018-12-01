@@ -5,15 +5,15 @@ var echarts = require('echarts/lib/echarts');
 var _patent = require('utils/patent.js');
 var _cited = require('html-loader!./cited.html');
 var _recent = require('html-loader!./recent.html');
+var _nber = require('html-loader!./nber.html');
 // 引入柱状图
 require('echarts');
 require('./index.css');
-require('./worldcloud.js');
 
 
 // 基于准备好的dom，初始化echarts实例
 var myChart = echarts.init(document.getElementById('trend-graph'));
-var cloudChart = echarts.init(document.getElementById('cloud-graph'));
+var pieGraph = echarts.init(document.getElementById('pie-graph'));
 var coGraph = echarts.init(document.getElementById('co-graph'));
 // 绘制图表
 var chartInfo = {
@@ -142,126 +142,75 @@ var chartInfo = {
 }
 chartInfo.chartInit();
 
-var cloudInfo = {
-    data: [],
-    option: {
-        tooltip: {},
-        series: [{
-            type : 'wordCloud',  //类型为字符云
-            shape:'smooth',  //平滑
-            gridSize : 2, //网格尺寸
-            size : ['80%','80%'],
-                //sizeRange : [ 50, 100 ],  
-            rotationRange : [ 46, 80 ], //旋转范围
-            textStyle : {  
-                normal : {
-                fontFamily:'sans-serif',
-                color : function() {  
-                    return 'rgb(' + [
-                        Math.round(Math.random() * 255),
-                        Math.round(Math.random() * 255),
-                        Math.round(Math.random() * 255)
-                        ].join(',') + ')';
-                }  
-                },  
-                emphasis : {  
-                    shadowBlur : 5,  //阴影距离
-                    shadowColor : '#333'  //阴影颜色
-                }  
-            },
-                data:[{
-                    name: '汽车',
-                    value: 10000,
-                }, {
-                    name: '光学',
-                    value: 6181
-                }, {
-                    name: '相机',
-                    value: 4386
-                }, {
-                    name: '调色',
-                    value: 4055
-                }, {
-                    name: '电子',
-                    value: 2467
-                }, {
-                    name: '中华人民共和国',
-                    value: 2244
-                }, {
-                    name: '三星电子',
-                    value: 1898
-                }, {
-                    name: '苹果',
-                    value: 1484
-                }, {
-                    name: '诺基亚',
-                    value: 1112
-                }, {
-                    name: '北京邮电大学',
-                    value: 965
-                }, {
-                    name: 'Macbook Pro',
-                    value: 847
-                }, {
-                    name: 'Elasctic Search',
-                    value: 582
-                }, {
-                    name: '食品安全',
-                    value: 555
-                }, {
-                    name: '少儿教育',
-                    value: 550
-                }, {
-                    name: '诺贝尔奖',
-                    value: 462
-                }, {
-                    name: '区块链技术',
-                    value: 366
-                }, {
-                    name: '数字货币',
-                    value: 360
-                }, {
-                    name: '汽车制造',
-                    value: 282
-                }, {
-                    name: '智能驾驶',
-                    value: 273
-                }, {
-                    name: '飞行',
-                    value: 273
-                }, {
-                    name: '计算机技术',
-                    value: 265
-                }]
-        }]
+var pieInfo = {
+    data : [{value:335, name:'G05D'},{value:310, name:'G05C'},{value:234, name:'G64C'},{value:135, name:'864C'},{value:1548, name:'864D'}],
+    option : {
+        title : {
+            text: 'IPC分类饼图',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['G05D','G05C','G64C','864C','864D']
+        },
+        series : [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:335, name:'G05D'},
+                    {value:310, name:'G05C'},
+                    {value:234, name:'G64C'},
+                    {value:135, name:'864C'},
+                    {value:1548, name:'864D'}
+                ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
     },
     chartInit : function(){
         this.getInfo();
         
     },
     setOption : function(){
-        var _this = this;
-        _this.option.series[0].data = _this.data;
+        this.option["legend"]["data"] = [];
+        for (let i=0,len=this.data;i<len;i++){
+            this.option["legend"]["data"].push(this.data[i]["name"]);
+        }
+        this.option["series"][0]["data"] = this.data;
     },
     getInfo : function(){
-        var _this = this;
+        let _this = this;
         let submit_data = _patent.getUrlParam('inventor');
         _patent.request({
             //发data到服务器地址
-            url : 'api/person/cloudChart/keywords/'+submit_data,
+            url : 'api/person/pieChart/patentClass/'+submit_data,
             method : 'get',
             success: function(res){
-                let cited = res;
-                let cloudres = res["data"];
-                console.log(cloudres);
                 if(res){
-                    // 接收页面信息
-                    _this.data = cloudres;
+                    console.log("res");
+                    console.log(res);
+                    _this.data = res["data"];
                     _this.setOption();
-                    cloudChart.setOption(_this.option);
+                    let nber = res;
+                    console.log(_this.option);
                     $('#inventor-cited').html("");
-                    $('#inventor-cited').append(_patent.renderHtml(_cited,cited));
+                    $('#inventor-cited').append(_patent.renderHtml(_nber,nber));
                 }
+                pieGraph.setOption(pieInfo.option)
                 
             },
             error: function(err){
@@ -269,9 +218,9 @@ var cloudInfo = {
             }
         });
     }
-}
-cloudInfo.getInfo();
 
+}
+pieInfo.getInfo();
 var coInfo = {
     years : [],
     inventors : [],
